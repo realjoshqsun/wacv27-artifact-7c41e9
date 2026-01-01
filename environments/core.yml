@@ -1,0 +1,16 @@
+name: treebench-core
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy=1.26
+  - pandas=2.2
+  - pytorch=2.2
+  - cpuonly
+  - scikit-learn=1.4
+  - pytest=8
+  - pip
+  - pip:
+      - laspy[lazrs]==2.5.4
+      - open3d==0.18.0

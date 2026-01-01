@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "status": "FROZEN_PAPER_TEST_AGGREGATES",
+  "artifact": {
+    "path": "full_results.csv",
+    "bytes": 65778,
+    "sha256": "bf0d3ab89b2f13427a6f9972c653e30965b4f5a984ac237d1e86de80792f9de8",
+    "rows": 94
+  },
+  "scope": {
+    "baselines": 16,
+    "method_scenario_rows": 94,
+    "metrics_per_row": 32,
+    "value_scope": "finite overall test-set means reported in the paper",
+    "completion_observations_per_tree": 8,
+    "distributed_padding_duplicates_removed": true
+  },
+  "limitations": [
+    "This artifact reproduces paper-table construction, not model inference.",
+    "It contains no per-sample predictions, source point clouds, or checkpoints.",
+    "Fresh run bundles must use the stricter --results path with per-sample and run provenance."
+  ]
+}

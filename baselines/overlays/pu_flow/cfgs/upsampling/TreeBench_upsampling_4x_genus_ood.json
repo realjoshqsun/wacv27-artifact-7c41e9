@@ -1,0 +1,11 @@
+{
+  "dataset_config": {
+    "data_dir": "./data/TreeBench/upsampling",
+    "npoints": 2048,
+    "R": 4,
+    "CATEGORY_FILE_PATH": "./data/TreeBench/8-1-1_genus-OOD_N>=8192.json",
+    "augmentation": {"pc_augm_scale": 1.2, "pc_augm_rot": true, "pc_rot_scale": 90, "pc_augm_mirror_prob": 0.5, "pc_augm_jitter": false, "translation_magnitude": 0.1, "noise_magnitude_for_generated_samples": 0}
+  },
+  "up_rate": 4,
+  "num_points": 2048
+}

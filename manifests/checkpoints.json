@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "included_in_review_zip": false,
+  "artifacts": [],
+  "expected_fields_when_hosted": [
+    "model_id",
+    "task",
+    "split",
+    "relative_filename",
+    "bytes",
+    "sha256",
+    "source_training_config_sha256",
+    "epoch",
+    "download_url"
+  ],
+  "status": "OPEN",
+  "release_gate": "Populate and verify this manifest if reviewer-accessible pretrained checkpoints are hosted. Checkpoints larger than 100 MB must not be committed to ordinary Git history."
+}
+

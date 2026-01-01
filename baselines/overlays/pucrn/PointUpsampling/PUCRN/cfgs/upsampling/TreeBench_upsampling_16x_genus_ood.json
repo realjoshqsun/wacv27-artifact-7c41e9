@@ -1,0 +1,14 @@
+{
+  "treebench_evaluation_only": true,
+  "treebench_source_training_config": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+  "treebench_16x_protocol": "two_pass_fixed_4x",
+  "dataset_config": {
+    "data_dir": "./data/TreeBench/upsampling",
+    "npoints": 512,
+    "R": 16,
+    "CATEGORY_FILE_PATH": "./data/TreeBench/8-1-1_genus-OOD_N>=8192.json",
+    "augmentation": {"pc_augm_scale": 1.2, "pc_augm_rot": true, "pc_rot_scale": 90, "pc_augm_mirror_prob": 0.5, "pc_augm_jitter": false, "translation_magnitude": 0.1, "noise_magnitude_for_generated_samples": 0}
+  },
+  "up_rate": 16,
+  "num_points": 512
+}

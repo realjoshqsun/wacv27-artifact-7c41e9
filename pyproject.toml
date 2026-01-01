@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "treebench-review"
+version = "0.1.0"
+description = "Anonymous review release for TreeBench point-cloud reconstruction evaluation"
+requires-python = ">=3.9"
+dependencies = [
+  "numpy>=1.23",
+  "torch>=1.13",
+]
+
+[project.optional-dependencies]
+data = [
+  "laspy[lazrs]>=2.4",
+  "open3d>=0.17",
+  "pandas>=1.5",
+  "scikit-learn>=1.1",
+]
+test = [
+  "pytest>=7",
+]
+
+[project.scripts]
+treebench-evaluate = "treebench.cli.evaluate:main"
+treebench-aggregate = "treebench.cli.aggregate:main"
+treebench-generate-demo = "treebench.cli.generate_demo:main"
+treebench-prepare = "treebench.cli.prepare:main"
+treebench-smoke = "treebench.cli.smoke:main"
+treebench-validate = "treebench.cli.validate:main"
+
+[tool.setuptools.packages.find]
+include = ["treebench*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

@@ -1,0 +1,43 @@
+optimizer : {
+  type: AdamW,
+  kwargs: {
+  lr : 0.0005, 
+  weight_decay : 0.0005
+}}
+
+scheduler: {
+  type: LambdaLR,
+  kwargs: {
+  decay_step: 21,
+  lr_decay: 0.9,
+  lowest_decay: 0.02  # min lr = lowest_decay * lr
+}}
+
+bnmscheduler: {
+  type: Lambda,
+  kwargs: {
+  decay_step: 21,
+  bn_decay: 0.5,
+  bn_momentum: 0.9,
+  lowest_decay: 0.01
+}}
+
+dataset : {
+  train : { _base_: cfgs/dataset_configs/TreeBench_upsampling_16x_random.yaml, 
+            others: {subset: 'train'}},
+  val : { _base_: cfgs/dataset_configs/TreeBench_upsampling_16x_random.yaml, 
+            others: {subset: 'val'}},
+  test : { _base_: cfgs/dataset_configs/TreeBench_upsampling_16x_random.yaml, 
+            others: {subset: 'test'}}}
+# 16x is evaluation-only: reuse the 4x-random checkpoint.  PoinTr appends its
+# input to a fixed learned point set, so the same 4x model is applied twice;
+# FPS reduces the first prediction to 2048 points before the second pass.
+treebench_evaluation_only: true
+treebench_16x_protocol: two_stage_4x_fps
+treebench_source_training_config: cfgs/TreeBench_models/PoinTr/upsampling_4x_random.yaml
+model : {
+  NAME: PoinTr, num_pred: 6177, num_query: 96, knn_layer: 1, trans_dim: 384}
+  
+total_bs : 512
+step_per_update : 1
+max_epoch : 9

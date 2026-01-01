@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "source_dataset": {
+    "title": "FOR-species20K",
+    "version_doi": "10.5281/zenodo.13255198",
+    "paper_doi": "10.1111/2041-210X.14503",
+    "record_url": "https://zenodo.org/records/13255198",
+    "required_files": [
+      {
+        "name": "dev.zip",
+        "bytes": 25354980290,
+        "md5": "ecb6196d9d630b095e6f6249b46efdd7"
+      },
+      {
+        "name": "tree_metadata_dev.csv",
+        "bytes": 1216814,
+        "md5": "603c91ff58c8eab486717ffc82a1b21f"
+      }
+    ]
+  },
+  "selection": {
+    "minimum_observed_points": 8192,
+    "selected_tree_count": 14884,
+    "species_count": 33,
+    "genus_count": 19,
+    "benchmark_identifier": "zero-padded source tree identifier"
+  },
+  "splits": {
+    "random": {
+      "path": "splits/random.json",
+      "counts": {"train": 11907, "val": 1488, "test": 1489},
+      "historical_source_sha256": "6f138f406968c2e7fce878038d92d49b85e49e547a6a2145434bdfe15b3dcac7",
+      "release_compact_sha256": "ba73ba8e7694799d02807afcf5f397f795ff0651f44da315c158422aff1c38b5"
+    },
+    "genus_ood": {
+      "path": "splits/genus_ood.json",
+      "counts": {"train": 12111, "val": 1386, "test": 1387},
+      "historical_source_sha256": "2e59045aee309976c7621c3efd8ea9ea7f24f87f13f70204e1e83bf523c64125",
+      "release_compact_sha256": "663d0a57baf75d7eef7976625e53ee947046198613af1fcfba2f61cfccce6c55"
+    }
+  },
+  "historical_reproducibility": {
+    "byte_exact_regeneration_from_source": false,
+    "reason": "Historical FPS subset and frozen-view generation did not persist RNG state, per-view poses, or artifact hashes.",
+    "authoritative_for_paper_results": "the frozen derived arrays used in the reported runs",
+    "release_generator_role": "deterministic reconstruction of the documented protocol for new builds"
+  },
+  "redistribution": {
+    "source_or_derived_points_included": false,
+    "reason": "The official data-rights metadata is inconsistent; see docs/THIRD_PARTY_DATA.md."
+  }
+}
+

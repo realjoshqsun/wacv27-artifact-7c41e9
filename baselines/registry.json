@@ -1,0 +1,1580 @@
+{
+  "schema_version": "1.0.0",
+  "registry_role": "authoritative_baseline_protocol",
+  "baseline_count": 16,
+  "expected_method_scenario_rows": 94,
+  "path_semantics": "Entrypoint and configuration paths are relative to the corresponding pinned upstream checkout after the TreeBench integration overlay is applied.",
+  "task_protocol": {
+    "splits": [
+      "random",
+      "genus_ood"
+    ],
+    "reference_points": 8192,
+    "completion": {
+      "input_points": 2048,
+      "output_points": 8192,
+      "trainable": true
+    },
+    "upsampling_4x": {
+      "input_points": 2048,
+      "output_points": 8192,
+      "trainable": true
+    },
+    "upsampling_16x": {
+      "input_points": 512,
+      "output_points": 8192,
+      "trainable": false,
+      "checkpoint_rule": "Use the split-matched upsampling_4x checkpoint without 16x fine-tuning."
+    },
+    "checkpoint_selection": {
+      "split": "validation",
+      "metric": "cd_l2",
+      "mode": "min"
+    }
+  },
+  "environment_profiles": {
+    "legacy_repkpu": {
+      "python": "3.6",
+      "pytorch": "1.10.1+cu113",
+      "cuda_runtime": "11.3",
+      "tested_custom_op_toolkit": "11.7",
+      "requires_compiled_cuda_extensions": true
+    },
+    "legacy_pointr": {
+      "python": "3.7",
+      "pytorch": "1.7.1+cu110",
+      "cuda_runtime": "11.0",
+      "requires_compiled_cuda_extensions": true
+    },
+    "legacy_pudm": {
+      "python": "3.7",
+      "pytorch": "1.9.1+cu111",
+      "cuda_runtime": "11.1",
+      "additional_core_packages": [
+        "pytorch3d==0.6.1",
+        "pytorch-lightning==0.7.1"
+      ],
+      "requires_compiled_cuda_extensions": true
+    }
+  },
+  "checkpoint_protocols": {
+    "generic_state_dict_v1": {
+      "best_filename": "ckpt/ckpt-best.pth",
+      "last_filename": "ckpt/ckpt-last.pth",
+      "required_keys": [
+        "epoch",
+        "model",
+        "optimizer",
+        "scheduler",
+        "best_cd"
+      ],
+      "model_state_key": "model"
+    },
+    "pointr_runner_v1": {
+      "best_filename": "ckpt-best.pth",
+      "last_filename": "ckpt-last.pth",
+      "required_keys": [
+        "base_model",
+        "optimizer",
+        "epoch",
+        "metrics",
+        "best_metrics"
+      ],
+      "model_state_key": "base_model"
+    },
+    "pudm_state_dict_v1": {
+      "best_filename": "ckpt-best.pth",
+      "last_filename": "ckpt-last.pth",
+      "required_keys": [
+        "model_state_dict",
+        "optimizer_state_dict",
+        "epoch",
+        "best_cd",
+        "best_epoch",
+        "val_metrics",
+        "training_time_seconds"
+      ],
+      "model_state_key": "model_state_dict"
+    },
+    "spupmd_provenance_v1": {
+      "extends": "generic_state_dict_v1",
+      "additional_requirement": "The checkpoint records the self-supervised loss and duplicate-handling policy used during training."
+    }
+  },
+  "output_protocols": {
+    "treebench_taxonomy_csv_v1": {
+      "prediction_tensor": "B,N,3",
+      "prediction_points": 8192,
+      "metric_space": "denormalized_metric_coordinates",
+      "metric_count": 32,
+      "aggregate_rows": [
+        "overall",
+        "genus",
+        "species"
+      ],
+      "aggregate_columns": 68,
+      "per_sample_files": [
+        "<stem>_val_per_sample.csv",
+        "<stem>_test_per_sample.csv"
+      ],
+      "per_sample_identity_columns": [
+        "name",
+        "mode",
+        "view",
+        "sample_key",
+        "input_points",
+        "output_points"
+      ],
+      "per_sample_taxonomy_columns": [
+        "species",
+        "genus"
+      ],
+      "sample_key_rule": {
+        "completion": "<name>|<uls_or_tls>|<view_0_to_3>",
+        "upsampling": "<name>"
+      },
+      "aggregate_file": "<stem>.csv",
+      "run_manifest_file": "<aggregate.csv>.run.json",
+      "required_run_manifest_fields": [
+        "baseline_id",
+        "scenario",
+        "source_training_scenario",
+        "upstream_commit",
+        "checkpoint_sha256",
+        "config_sha256",
+        "taxonomy_csv_sha256",
+        "split_manifest_sha256",
+        "cross_rate_route",
+        "input_points",
+        "output_points",
+        "aggregate_csv",
+        "per_sample",
+        "sample_counts",
+        "metric_contract",
+        "cardinality_contract"
+      ]
+    }
+  },
+  "baselines": [
+    {
+      "id": "pu_gcn",
+      "display_name": "PU-GCN",
+      "publication": {"venue": "CVPR", "year": 2021},
+      "model_family": "graph_convolutional_upsampling",
+      "upstream": {
+        "url": "https://github.com/guochengqian/PU-GCN.git",
+        "commit": "0a8daac57dbda037689d797c679d3540ee253317",
+        "license": {
+          "status": "not_found_in_upstream_checkout",
+          "spdx": null
+        }
+      },
+      "environment": "legacy_repkpu",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "compose_fixed_4x_twice",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward_4x",
+          "model_forward_4x"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "epochs": null,
+        "epoch_encoding": null,
+        "batch_size": null,
+        "learning_rate": null,
+        "save_every_epochs": null,
+        "dataloader_workers": null,
+        "gpu_count": null,
+        "distributed_launcher": {
+          "status": "OPEN",
+          "module": null
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "batch_size": null,
+        "dataloader_workers": null
+      }
+    },
+    {
+      "id": "pointr",
+      "display_name": "PoinTr",
+      "publication": {"venue": "ICCV", "year": 2021},
+      "model_family": "transformer_completion",
+      "upstream": {
+        "url": "https://github.com/yuxumin/PoinTr.git",
+        "commit": "2e53e72367db9dbc3832ca534569f0fed9dd7dc1",
+        "license": {
+          "status": "found",
+          "spdx": "MIT"
+        }
+      },
+      "environment": "legacy_pointr",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "main.py",
+          "runner": "tools/runner_treebench.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/TreeBench_models/PoinTr/upsampling_4x_{split}.yaml"
+        },
+        "completion": {
+          "train": "main.py",
+          "runner": "tools/runner_treebench.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/TreeBench_models/PoinTr/completion_{split}.yaml"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "runner": "tools/runner_treebench.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/TreeBench_models/PoinTr/upsampling_16x_{split}.yaml"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "compose_fixed_output_with_intermediate_fps",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward",
+          "deterministic_farthest_point_sample_to_2048",
+          "model_forward"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "pointr_runner_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_launcher_and_completed_training_log",
+        "epochs": 10,
+        "epoch_encoding": {
+          "kind": "inclusive_max_epoch",
+          "value": 9
+        },
+        "batch_size": {
+          "value": 512,
+          "scope": "global"
+        },
+        "learning_rate": 0.0005,
+        "save_every_epochs": 1,
+        "dataloader_workers": 8,
+        "gpu_count": 4,
+        "distributed_launcher": {
+          "status": "VERIFIED",
+          "module": "torch.distributed.launch"
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_taxonomy_launchers",
+        "batch_size": {
+          "completion": 8,
+          "upsampling_4x": 8,
+          "upsampling_16x": 1
+        },
+        "dataloader_workers": 8
+      }
+    },
+    {
+      "id": "snowflakenet",
+      "display_name": "SnowflakeNet",
+      "publication": {"venue": "ICCV", "year": 2021},
+      "model_family": "progressive_completion",
+      "upstream": {
+        "url": "https://github.com/AllenXiangX/SnowflakeNet.git",
+        "commit": "0880ba1e1bf1c135d276aa0044f0acd38c44d94e",
+        "license": {
+          "status": "found",
+          "spdx": "MIT"
+        }
+      },
+      "environment": "legacy_pointr",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "fixed_8192_output_direct",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward_from_512_to_fixed_8192"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_launcher_batch_probe_and_completed_training_log",
+        "epochs": 10,
+        "epoch_encoding": {
+          "kind": "cli_epochs",
+          "value": 10
+        },
+        "batch_size": {
+          "value": 64,
+          "scope": "per_gpu"
+        },
+        "learning_rate": 0.001,
+        "save_every_epochs": 1,
+        "dataloader_workers": 8,
+        "gpu_count": 4,
+        "distributed_launcher": {
+          "status": "VERIFIED",
+          "module": "torch.distributed.launch"
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_taxonomy_launchers",
+        "batch_size": {
+          "completion": 2,
+          "upsampling_4x": 2,
+          "upsampling_16x": 2
+        },
+        "dataloader_workers": 8
+      }
+    },
+    {
+      "id": "pucrn",
+      "display_name": "PUCRN",
+      "publication": {"venue": "ACCV", "year": 2022},
+      "model_family": "cascaded_refinement_upsampling",
+      "upstream": {
+        "url": "https://github.com/hikvision-research/3DVision.git",
+        "commit": "09bba9701da92e43f6d1bb515591d7f9cb91d2ff",
+        "checkout_subdirectory": "PointUpsampling/PUCRN",
+        "license": {
+          "status": "found",
+          "spdx": "Apache-2.0"
+        }
+      },
+      "environment": "legacy_repkpu",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "PointUpsampling/PUCRN/train_treebench_ddp.py",
+          "evaluate": "PointUpsampling/PUCRN/analyze_treebench_taxonomy.py",
+          "config": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "PointUpsampling/PUCRN/train_treebench_ddp.py",
+          "evaluate": "PointUpsampling/PUCRN/analyze_treebench_taxonomy.py",
+          "config": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "PointUpsampling/PUCRN/analyze_treebench_taxonomy.py",
+          "config": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "compose_fixed_4x_twice",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "crnet_4x_forward",
+          "crnet_4x_forward"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_launcher_and_completed_training_log",
+        "epochs": 10,
+        "epoch_encoding": {
+          "kind": "cli_epochs",
+          "value": 10
+        },
+        "batch_size": {
+          "value": 2,
+          "scope": "per_gpu"
+        },
+        "learning_rate": 0.001,
+        "save_every_epochs": 1,
+        "dataloader_workers": 8,
+        "gpu_count": 4,
+        "distributed_launcher": {
+          "status": "VERIFIED",
+          "module": "torch.distributed.run"
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_taxonomy_launchers",
+        "batch_size": {
+          "completion": 2,
+          "upsampling_4x": 2,
+          "upsampling_16x": 2
+        },
+        "dataloader_workers": 8
+      }
+    },
+    {
+      "id": "neural_points",
+      "display_name": "Neural-Points",
+      "publication": {"venue": "CVPR", "year": 2022},
+      "model_family": "implicit_surface_upsampling",
+      "upstream": {
+        "url": "https://github.com/WanquanF/NeuralPoints.git",
+        "commit": "a132ddd01ce3e16bb5a2781b9ce18a28a1d91d44",
+        "license": {
+          "status": "not_found_in_upstream_checkout",
+          "spdx": null
+        }
+      },
+      "environment": "legacy_pointr",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "runtime_query_ratio_16",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "load_training_up_ratio_4_weights",
+          "set_runtime_uv_query_ratio_16",
+          "enable_local_gradients_for_surface_normal_derivatives",
+          "model_forward"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "epochs": null,
+        "epoch_encoding": null,
+        "batch_size": null,
+        "learning_rate": null,
+        "save_every_epochs": null,
+        "dataloader_workers": null,
+        "gpu_count": null,
+        "distributed_launcher": {
+          "status": "OPEN",
+          "module": null
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "batch_size": null,
+        "dataloader_workers": null
+      }
+    },
+    {
+      "id": "anchorformer",
+      "display_name": "AnchorFormer",
+      "publication": {"venue": "CVPR", "year": 2023},
+      "model_family": "anchor_transformer_completion",
+      "upstream": {
+        "url": "https://github.com/chenzhik/AnchorFormer.git",
+        "commit": "c580df79d86ad90c6e0fe0c021cdf171f185c1fb",
+        "license": {
+          "status": "not_found_in_upstream_checkout",
+          "spdx": null
+        }
+      },
+      "environment": "legacy_pointr",
+      "runtime_environment": {
+        "TREEBENCH_SAFE_EXPANSION": "1"
+      },
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "fixed_16384_output_then_fps_8192",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward_from_512_to_fixed_16384",
+          "deterministic_farthest_point_sample_to_8192"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "epochs": null,
+        "epoch_encoding": null,
+        "batch_size": null,
+        "learning_rate": null,
+        "save_every_epochs": null,
+        "dataloader_workers": null,
+        "gpu_count": null,
+        "distributed_launcher": {
+          "status": "OPEN",
+          "module": null
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "batch_size": null,
+        "dataloader_workers": null
+      }
+    },
+    {
+      "id": "pu_flow",
+      "display_name": "PU-Flow",
+      "publication": {"venue": "TVCG", "year": 2023},
+      "model_family": "normalizing_flow_upsampling",
+      "upstream": {
+        "url": "https://github.com/unknownue/puflow.git",
+        "commit": "c8972072a35220b83ddbe8edf7423757b771e09b",
+        "license": {
+          "status": "found",
+          "spdx": "MIT"
+        }
+      },
+      "environment": "legacy_pudm",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "runtime_upsampling_ratio_16",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "load_unchanged_4x_weights",
+          "set_runtime_upratio_16",
+          "model_forward"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_launcher_and_completed_training_log",
+        "epochs": 10,
+        "epoch_encoding": {
+          "kind": "cli_epochs",
+          "value": 10
+        },
+        "batch_size": {
+          "value": 1,
+          "scope": "per_gpu"
+        },
+        "learning_rate": 0.001,
+        "save_every_epochs": 1,
+        "dataloader_workers": 8,
+        "gpu_count": 4,
+        "distributed_launcher": {
+          "status": "VERIFIED",
+          "module": "torch.distributed.run"
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_taxonomy_launchers",
+        "batch_size": {
+          "completion": 1,
+          "upsampling_4x": 1,
+          "upsampling_16x": 1
+        },
+        "dataloader_workers": 8
+      }
+    },
+    {
+      "id": "adapointr",
+      "display_name": "AdaPoinTr",
+      "publication": {"venue": "TPAMI", "year": 2023},
+      "model_family": "adaptive_transformer_completion",
+      "upstream": {
+        "url": "https://github.com/yuxumin/PoinTr.git",
+        "commit": "2e53e72367db9dbc3832ca534569f0fed9dd7dc1",
+        "license": {
+          "status": "found",
+          "spdx": "MIT"
+        }
+      },
+      "environment": "legacy_pointr",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "main.py",
+          "runner": "tools/runner_treebench.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/TreeBench_models/AdaPoinTr/upsampling_4x_{split}.yaml"
+        },
+        "completion": {
+          "train": "main.py",
+          "runner": "tools/runner_treebench.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/TreeBench_models/AdaPoinTr/completion_{split}.yaml"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "runner": "tools/runner_treebench.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/TreeBench_models/AdaPoinTr/upsampling_16x_{split}.yaml"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "fixed_8192_output_direct",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward_from_512_to_fixed_8192"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "pointr_runner_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_launcher_and_completed_training_log",
+        "epochs": 10,
+        "epoch_encoding": {
+          "kind": "inclusive_max_epoch",
+          "value": 9
+        },
+        "batch_size": {
+          "value": 256,
+          "scope": "global"
+        },
+        "learning_rate": 0.0001,
+        "save_every_epochs": 1,
+        "dataloader_workers": 8,
+        "gpu_count": 4,
+        "distributed_launcher": {
+          "status": "VERIFIED",
+          "module": "torch.distributed.launch"
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_taxonomy_launchers",
+        "batch_size": {
+          "completion": 8,
+          "upsampling_4x": 8,
+          "upsampling_16x": 4
+        },
+        "dataloader_workers": 8
+      }
+    },
+    {
+      "id": "svdformer",
+      "display_name": "SVDFormer",
+      "publication": {"venue": "ICCV", "year": 2023},
+      "model_family": "transformer_completion",
+      "upstream": {
+        "url": "https://github.com/czvvd/SVDFormer_PointSea.git",
+        "commit": "25bd30c5572442b33160e78023567866c6ed42fc",
+        "license": {
+          "status": "found",
+          "spdx": "MIT"
+        }
+      },
+      "environment": "legacy_pointr",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "fixed_8192_output_direct",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward_from_512_to_fixed_8192"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_launcher_and_completed_training_log",
+        "epochs": 10,
+        "epoch_encoding": {
+          "kind": "cli_epochs",
+          "value": 10
+        },
+        "batch_size": {
+          "value": 1,
+          "scope": "per_gpu"
+        },
+        "learning_rate": 0.001,
+        "save_every_epochs": 1,
+        "dataloader_workers": 8,
+        "gpu_count": 4,
+        "distributed_launcher": {
+          "status": "VERIFIED",
+          "module": "torch.distributed.launch"
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_taxonomy_launchers",
+        "batch_size": {
+          "completion": 1,
+          "upsampling_4x": 1,
+          "upsampling_16x": 1
+        },
+        "dataloader_workers": 8
+      }
+    },
+    {
+      "id": "odgnet",
+      "display_name": "ODGNet",
+      "publication": {"venue": "AAAI", "year": 2024},
+      "model_family": "dictionary_guided_completion",
+      "upstream": {
+        "url": "https://github.com/corecai163/ODGNet.git",
+        "commit": "032bca98f89cc3ea4733b331ff91468df1bea0f9",
+        "license": {
+          "status": "not_found_in_upstream_checkout",
+          "spdx": null
+        }
+      },
+      "environment": "legacy_pointr",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "main.py",
+          "runner": "tools/runner_treebench.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/TreeBench_models/ODGNet/upsampling_4x_{split}.yaml"
+        },
+        "completion": {
+          "train": "main.py",
+          "runner": "tools/runner_treebench.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/TreeBench_models/ODGNet/completion_{split}.yaml"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "runner": "tools/runner_treebench.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/TreeBench_models/ODGNet/upsampling_16x_{split}.yaml"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "fixed_8192_output_direct",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward_from_512_to_fixed_8192"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "pointr_runner_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "epochs": null,
+        "epoch_encoding": null,
+        "batch_size": null,
+        "learning_rate": null,
+        "save_every_epochs": null,
+        "dataloader_workers": null,
+        "gpu_count": null,
+        "distributed_launcher": {
+          "status": "OPEN",
+          "module": null
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "batch_size": null,
+        "dataloader_workers": null
+      }
+    },
+    {
+      "id": "repkpu",
+      "display_name": "RepKPU",
+      "publication": {"venue": "CVPR", "year": 2024},
+      "model_family": "kernel_point_upsampling",
+      "upstream": {
+        "url": "https://github.com/EasyRy/RepKPU.git",
+        "commit": "80e2f293410a69747c0c61afe6f1fa2f71655133",
+        "license": {
+          "status": "found",
+          "spdx": "MIT"
+        }
+      },
+      "environment": "legacy_repkpu",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "train_TreeBench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "train_TreeBench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "compose_fixed_4x_twice_with_training_patch_scale",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward_4x",
+          "restore_training_patch_scale",
+          "model_forward_4x"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "OPEN_COMMAND_PROVENANCE",
+        "evidence": "completed_training_logs_verify_scientific_hyperparameters_but_the_original_launcher_command_was_not_preserved",
+        "epochs": 50,
+        "epoch_encoding": {
+          "kind": "cli_epochs",
+          "value": 50
+        },
+        "batch_size": {
+          "value": 24,
+          "scope": "per_gpu"
+        },
+        "learning_rate": 0.001,
+        "save_every_epochs": 1,
+        "dataloader_workers": 8,
+        "gpu_count": 4,
+        "distributed_launcher": {
+          "status": "OPEN",
+          "module": null
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_taxonomy_launchers",
+        "batch_size": {
+          "completion": 24,
+          "upsampling_4x": 24,
+          "upsampling_16x": 8
+        },
+        "dataloader_workers": 8
+      }
+    },
+    {
+      "id": "pudm",
+      "display_name": "PUDM",
+      "publication": {"venue": "CVPR", "year": 2024},
+      "model_family": "diffusion_upsampling",
+      "upstream": {
+        "url": "https://github.com/QWTforGithub/PUDM.git",
+        "commit": "b7e3f11e99667a06a6fcafa3d5eb42ca573d5b34",
+        "checkout_subdirectory": "pointnet2",
+        "license": {
+          "status": "found",
+          "spdx": "MIT"
+        }
+      },
+      "environment": "legacy_pudm",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "pointnet2/train_treebench.py",
+          "evaluate": "pointnet2/analyze_treebench_taxonomy.py",
+          "evaluation_core": "pointnet2/eval_treebench.py",
+          "config": "pointnet2/exp_configs/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "pointnet2/train_treebench.py",
+          "evaluate": "pointnet2/analyze_treebench_taxonomy.py",
+          "evaluation_core": "pointnet2/eval_treebench.py",
+          "config": "pointnet2/exp_configs/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "pointnet2/analyze_treebench_taxonomy.py",
+          "evaluation_core": "pointnet2/eval_treebench.py",
+          "config": "pointnet2/exp_configs/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "runtime_ratio_16_with_training_condition_4",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "load_unchanged_4x_weights",
+          "keep_conditioning_ratio_4",
+          "set_runtime_output_ratio_16",
+          "diffusion_sample"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "pudm_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_launcher_runtime_config_and_completed_training_log",
+        "epochs": 10,
+        "epoch_encoding": {
+          "kind": "json_train_config_n_epochs",
+          "value": 10
+        },
+        "batch_size": {
+          "value": 24,
+          "scope": "per_gpu"
+        },
+        "learning_rate": 0.0001,
+        "minimum_learning_rate": 0.000001,
+        "save_every_epochs": 1,
+        "dataloader_workers": 8,
+        "gpu_count": 4,
+        "distributed_launcher": {
+          "status": "VERIFIED",
+          "module": "torch.distributed.launch"
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_taxonomy_launchers",
+        "batch_size": {
+          "completion": 1,
+          "upsampling_4x": 1,
+          "upsampling_16x": 1
+        },
+        "dataloader_workers": 8
+      }
+    },
+    {
+      "id": "fsc",
+      "display_name": "FSC",
+      "publication": {"venue": "CVPR", "year": 2024},
+      "model_family": "completion",
+      "upstream": {
+        "url": "https://github.com/xianzuwu/FSC.git",
+        "commit": "3341a4996b2a3047d891de5204519b385b86e165",
+        "license": {
+          "status": "found",
+          "spdx": "MIT"
+        }
+      },
+      "environment": "legacy_pointr",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "fixed_8192_output_direct",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward_from_512_to_fixed_8192"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_launcher_and_completed_training_log",
+        "epochs": 10,
+        "epoch_encoding": {
+          "kind": "cli_epochs",
+          "value": 10
+        },
+        "batch_size": {
+          "value": 1,
+          "scope": "per_gpu"
+        },
+        "learning_rate": 0.001,
+        "save_every_epochs": 1,
+        "dataloader_workers": 8,
+        "gpu_count": 4,
+        "distributed_launcher": {
+          "status": "VERIFIED",
+          "module": "torch.distributed.launch"
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_taxonomy_launchers",
+        "batch_size": {
+          "completion": 1,
+          "upsampling_4x": 1,
+          "upsampling_16x": 1
+        },
+        "dataloader_workers": 8
+      }
+    },
+    {
+      "id": "spu_pmd",
+      "display_name": "SPU-PMD",
+      "publication": {"venue": "CVPR", "year": 2024},
+      "model_family": "self_supervised_mesh_upsampling",
+      "upstream": {
+        "url": "https://github.com/lyz21/SPU-PMD.git",
+        "commit": "f20596dfb8ebd23b2fca3ce2efa454718dd3619c",
+        "license": {
+          "status": "not_found_in_upstream_checkout",
+          "spdx": null
+        }
+      },
+      "environment": "legacy_pointr",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": null,
+          "evaluate": null,
+          "config": null
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "compose_fixed_4x_twice_with_renormalization",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward_4x",
+          "denormalize_intermediate_prediction",
+          "renormalize_intermediate_prediction",
+          "model_forward_4x"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "spupmd_provenance_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "epochs": null,
+        "epoch_encoding": null,
+        "batch_size": null,
+        "learning_rate": null,
+        "save_every_epochs": null,
+        "dataloader_workers": null,
+        "gpu_count": null,
+        "distributed_launcher": {
+          "status": "OPEN",
+          "module": null
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "batch_size": null,
+        "dataloader_workers": null
+      }
+    },
+    {
+      "id": "geoformer",
+      "display_name": "GeoFormer",
+      "publication": {"venue": "ACM MM", "year": 2024},
+      "model_family": "geometry_aware_transformer_completion",
+      "upstream": {
+        "url": "https://github.com/Jinpeng-Yu/GeoFormer.git",
+        "commit": "9e0649d2111511dfc96ac47c5182522a792c51b1",
+        "license": {
+          "status": "found",
+          "spdx": "MIT",
+          "file": "src/LICENSE"
+        }
+      },
+      "environment": "legacy_pointr",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "src/train_treebench_ddp.py",
+          "evaluate": "src/analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "src/train_treebench_ddp.py",
+          "evaluate": "src/analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "src/analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "fixed_8192_output_direct",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "model_forward_from_512_to_fixed_8192"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_launcher_and_completed_training_log",
+        "epochs": 10,
+        "epoch_encoding": {
+          "kind": "cli_epochs",
+          "value": 10
+        },
+        "batch_size": {
+          "value": 1,
+          "scope": "per_gpu"
+        },
+        "learning_rate": 0.001,
+        "save_every_epochs": 1,
+        "dataloader_workers": 8,
+        "gpu_count": 4,
+        "distributed_launcher": {
+          "status": "VERIFIED",
+          "module": "torch.distributed.launch"
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "VERIFIED",
+        "evidence": "archived_final_taxonomy_launchers",
+        "batch_size": {
+          "completion": 1,
+          "upsampling_4x": 1,
+          "upsampling_16x": 1
+        },
+        "dataloader_workers": 8
+      }
+    },
+    {
+      "id": "pufm",
+      "display_name": "PUFM",
+      "publication": {"venue": "AAAI", "year": 2026},
+      "model_family": "flow_matching_upsampling",
+      "upstream": {
+        "url": "https://github.com/Holmes-Alan/PUFM.git",
+        "commit": "61908ebfe1d2eb2f8cb4a40c7ebbb89e6de09723",
+        "license": {
+          "status": "not_found_in_upstream_checkout",
+          "spdx": null
+        }
+      },
+      "environment": "legacy_pointr",
+      "entrypoints": {
+        "upsampling_4x": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_4x_{split}.json"
+        },
+        "completion": {
+          "train": "train_treebench_ddp.py",
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_completion_{split}.json"
+        },
+        "upsampling_16x": {
+          "train": null,
+          "evaluate": "analyze_treebench_taxonomy.py",
+          "config": "cfgs/upsampling/TreeBench_upsampling_16x_{split}.json"
+        }
+      },
+      "trainable_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood"
+      ],
+      "evaluation_scenarios": [
+        "completion_random",
+        "completion_genus_ood",
+        "upsampling_4x_random",
+        "upsampling_4x_genus_ood",
+        "upsampling_16x_random",
+        "upsampling_16x_genus_ood"
+      ],
+      "cross_rate_16x": {
+        "route_id": "compose_learned_4x_twice",
+        "source_checkpoint": {
+          "random": "upsampling_4x_random",
+          "genus_ood": "upsampling_4x_genus_ood"
+        },
+        "operations": [
+          "five_step_euler_sample_4x",
+          "five_step_euler_sample_4x"
+        ],
+        "independent_training_allowed": false
+      },
+      "checkpoint_protocol": "generic_state_dict_v1",
+      "output_protocol": "treebench_taxonomy_csv_v1",
+      "training_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "epochs": null,
+        "epoch_encoding": null,
+        "batch_size": null,
+        "learning_rate": null,
+        "save_every_epochs": null,
+        "dataloader_workers": null,
+        "gpu_count": null,
+        "distributed_launcher": {
+          "status": "OPEN",
+          "module": null
+        }
+      },
+      "evaluation_reproduction": {
+        "status": "OPEN_LEGAL_BLOCKED",
+        "evidence": "integration_cannot_be_released_without_upstream_redistribution_permission",
+        "batch_size": null,
+        "dataloader_workers": null
+      }
+    }
+  ],
+  "training_comparison_policy": {
+    "compute_controlled_across_models": false,
+    "statement": "Reported checkpoints use model-specific executed training budgets; epochs and batch sizes are not normalized across architectures.",
+    "launcher_policy": "run_baseline.py consumes each baseline's verified training_reproduction record and rejects OPEN command provenance.",
+    "evaluation_only_16x": true
+  }
+}

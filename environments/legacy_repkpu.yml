@@ -1,0 +1,18 @@
+name: treebench-legacy-repkpu
+channels:
+  - conda-forge
+dependencies:
+  - python=3.6.13
+  - pip=21.3.1
+  - pip:
+      - --find-links https://download.pytorch.org/whl/torch_stable.html
+      - torch==1.10.1+cu113
+      - numpy==1.19.5
+      - scipy==1.5.4
+      - pandas==1.1.5
+      - einops==0.4.1
+      - h5py==3.1.0
+      - tensorboard==2.10.1
+      - transforms3d==0.4.2
+      - tqdm==4.64.0
+      - psutil==7.0.0

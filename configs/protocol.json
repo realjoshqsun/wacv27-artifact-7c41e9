@@ -1,0 +1,475 @@
+{
+  "schema_version": "1.0.0",
+  "benchmark": "TreeBench",
+  "coordinate_convention": "XYZ with Z vertical",
+  "source": {
+    "dataset": "FOR-species20K",
+    "partition": "labelled/public training partition",
+    "candidate_trees": 17707,
+    "eligibility": {
+      "minimum_source_points": 8192,
+      "comparison": ">="
+    },
+    "retained_trees": 14884,
+    "genera": 19,
+    "species": 33,
+    "eligibility_statistics_sha256": "ab3d92916a716b69426c57975caf7774bf6f7cc845569440d0ca11714b8e3650",
+    "taxonomy_metadata_sha256": "29548180da80f94f6028b7efdcfbc839d0ede801fcb003a0b244e549cabb8ae0"
+  },
+  "reference": {
+    "points": 8192,
+    "sampling": "farthest_point_sampling",
+    "historical_backend": "Open3D farthest_point_down_sample",
+    "normalization": {
+      "center": "mean of the full eligible source cloud",
+      "scale": "maximum Euclidean distance from center over the full eligible source cloud",
+      "forward": "normalized = (raw - center) / scale",
+      "inverse": "raw = normalized * scale + center"
+    },
+    "required_metadata": [
+      "treeID",
+      "center",
+      "scale"
+    ]
+  },
+  "splits": {
+    "random": {
+      "manifest": "8-1-1_random_N>=8192.json",
+      "sha256": "6f138f406968c2e7fce878038d92d49b85e49e547a6a2145434bdfe15b3dcac7",
+      "method": "genus-stratified 80/10/10",
+      "implementation": "sklearn.model_selection.train_test_split",
+      "random_state": 42,
+      "counts": {
+        "train": 11907,
+        "validation": 1488,
+        "test": 1489,
+        "total": 14884
+      }
+    },
+    "genus_ood": {
+      "manifest": "8-1-1_genus-OOD_N>=8192.json",
+      "sha256": "2e59045aee309976c7621c3efd8ea9ea7f24f87f13f70204e1e83bf523c64125",
+      "training_genera": [
+        "Acer",
+        "Betula",
+        "Carpinus",
+        "Eucalyptus",
+        "Fagus",
+        "Fraxinus",
+        "Picea",
+        "Pinus",
+        "Pseudotsuga"
+      ],
+      "held_out_genera": [
+        "Prunus",
+        "Corylus",
+        "Euonymus",
+        "Larix",
+        "Abies",
+        "Populus",
+        "Crataegus",
+        "Ulmus",
+        "Tilia",
+        "Quercus"
+      ],
+      "held_out_split": {
+        "implementation": "pandas.DataFrame.sample",
+        "validation_fraction": 0.5,
+        "random_state": 42,
+        "test": "remainder"
+      },
+      "counts": {
+        "train": 12111,
+        "validation": 1386,
+        "test": 1387,
+        "total": 14884
+      }
+    }
+  },
+  "tasks": {
+    "upsampling": {
+      "reference_points": 8192,
+      "nested_subset_order": [
+        8192,
+        4096,
+        2048,
+        1024,
+        512
+      ],
+      "subset_sampling": "uniform_without_replacement_from_previous_level",
+      "settings": {
+        "4x": {
+          "input_points": 2048,
+          "output_points": 8192
+        },
+        "16x": {
+          "input_points": 512,
+          "output_points": 8192
+        }
+      },
+      "legacy_exclusions": {
+        "16384_point_files": "outside benchmark protocol"
+      }
+    },
+    "completion": {
+      "input_points": 2048,
+      "reference_points": 8192,
+      "visibility_resolution": [
+        256,
+        256
+      ],
+      "z_buffer_rule": "closest point per occupied projection pixel",
+      "visible_index_merge": "set union across viewpoints",
+      "output_sampling": {
+        "if_visible_count_at_least_target": "uniform_without_replacement",
+        "otherwise": "uniform_with_replacement"
+      },
+      "tls": {
+        "projection": "spherical_azimuth_elevation",
+        "views_per_observation": 1,
+        "azimuth_radians": "U(0, 2*pi)",
+        "scanner_height_metres": "z_min + U(1.5, 2.0)",
+        "canonical_evaluation_radial_distance": "0.1 * tree_height"
+      },
+      "uls": {
+        "projection": "orthographic_XY",
+        "flight_height_metres": "z_min + U(60, 75)",
+        "pivot_xy_offset_metres": "independent U(-0.5, 0.5)",
+        "heading_radians": "U(0, 2*pi)",
+        "line_extent": "clipped to the XY tree bounding box",
+        "trajectory_spacing_metres": 0.1,
+        "maximum_viewpoints": 10,
+        "viewpoint_reduction": "evenly_spaced_indices",
+        "fallback": "single overhead view at XY tree center"
+      },
+      "training": {
+        "mode_probability": {
+          "tls": 0.5,
+          "uls": 0.5
+        },
+        "sampling": "generated_on_access",
+        "historical_tls_variants": {
+          "fixed_0.1H": [
+            "PoinTr",
+            "AdaPoinTr",
+            "ODGNet",
+            "PUDM"
+          ],
+          "uniform_0.5H_to_1.0H": [
+            "APU-LDI",
+            "AnchorFormer",
+            "FBNet",
+            "FSC",
+            "GeoFormer",
+            "Grad-PU",
+            "Neural-Points",
+            "PU-Flow",
+            "PU-GCN",
+            "PUCRN",
+            "PUFM",
+            "RepKPU",
+            "SeedFormer",
+            "SnowflakeNet",
+            "SPU-PMD",
+            "SVDFormer"
+          ]
+        }
+      },
+      "evaluation": {
+        "frozen": true,
+        "views_per_mode": 4,
+        "modes": [
+          "uls",
+          "tls"
+        ],
+        "loader_order": [
+          "uls_0",
+          "uls_1",
+          "uls_2",
+          "uls_3",
+          "tls_0",
+          "tls_1",
+          "tls_2",
+          "tls_3"
+        ],
+        "sample_key": [
+          "tree_id",
+          "mode",
+          "view_index"
+        ],
+        "filenames": {
+          "partial": "2048_{mode}_{view_index}.npy",
+          "reference": "8192_complete.npy"
+        }
+      }
+    }
+  },
+  "evaluation": {
+    "prediction_shape": [
+      8192,
+      3
+    ],
+    "reference_shape": [
+      8192,
+      3
+    ],
+    "aggregation": "unweighted arithmetic mean of per-sample metrics",
+    "distributed_padding_deduplication": "unique sample_key",
+    "non_finite_point_metric_policy": "return NaN for every point metric for the sample",
+    "non_finite_tree_metric_policy": "return NaN for every tree metric for the sample",
+    "point_metric_coordinates": "normalized",
+    "tree_metric_coordinates": "metres_after_denormalization"
+  },
+  "metric_parameters": {
+    "f1_tolerance_normalized_euclidean": 0.01,
+    "f1_comparison": "strictly_less_than",
+    "dcd_alpha": 1000.0,
+    "dcd_density_power": 1.0,
+    "dcd_count_epsilon": 1e-6,
+    "voxel_size_metres": 0.05,
+    "vertical_profile_bins": 20,
+    "crown_base_active_fraction": 0.1,
+    "crown_base_comparison": "strictly_greater_than",
+    "crown_base_minimum_consecutive_bins": 2,
+    "fuel_bin_size_metres": 0.25,
+    "fuel_layer_active_fraction": 0.1,
+    "fuel_layer_comparison": "greater_than_or_equal",
+    "fuel_layer_minimum_consecutive_bins": 2,
+    "relative_error_denominator": "abs(reference).clamp_min(1e-8)",
+    "shared_grid_origin": "componentwise_min(prediction_union_reference) - voxel_size"
+  },
+  "metrics": [
+    {
+      "name": "cd_l2",
+      "family": "point",
+      "coordinates": "normalized",
+      "direction": "lower",
+      "definition": "mean squared NN distance prediction-to-reference plus mean squared NN distance reference-to-prediction"
+    },
+    {
+      "name": "cd_l1",
+      "family": "point",
+      "coordinates": "normalized",
+      "direction": "lower",
+      "definition": "one half times the sum of mean Euclidean NN distances in both directions"
+    },
+    {
+      "name": "mhd2",
+      "legacy_name": "hd",
+      "family": "point",
+      "coordinates": "normalized",
+      "direction": "lower",
+      "definition": "one half times the sum of maximum squared NN distances in both directions"
+    },
+    {
+      "name": "dcd",
+      "family": "point",
+      "coordinates": "normalized",
+      "direction": "lower",
+      "definition": "density-aware Chamfer distance"
+    },
+    {
+      "name": "f1",
+      "family": "point",
+      "coordinates": "normalized",
+      "direction": "higher",
+      "definition": "harmonic mean of precision and recall at normalized Euclidean tolerance 0.01"
+    },
+    {
+      "name": "tree_height_abs_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "tree_height_relative_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "crown_width_abs_error",
+      "family": "structural",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "crown_width_relative_error",
+      "family": "structural",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "crown_projection_area_abs_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "crown_projection_area_relative_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "crown_projection_iou",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "higher"
+    },
+    {
+      "name": "occupied_volume_abs_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "occupied_volume_relative_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "canopy_occupancy_iou",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "higher"
+    },
+    {
+      "name": "vertical_profile_l1",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "crown_length_abs_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "crown_length_relative_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "relative_height_25_abs_error",
+      "family": "structural",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "relative_height_50_abs_error",
+      "family": "structural",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "relative_height_75_abs_error",
+      "family": "structural",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "relative_height_95_abs_error",
+      "family": "structural",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "foliage_height_diversity_abs_error",
+      "family": "structural",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "crown_base_height_abs_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "crown_base_height_relative_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "fuel_stratum_profile_l1",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "stratum_percentage_cover_l1",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "fuel_layer_count_abs_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "lowest_fuel_layer_base_height_abs_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "dominant_fuel_layer_depth_abs_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "mean_interlayer_distance_abs_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    },
+    {
+      "name": "largest_vertical_gap_abs_error",
+      "family": "canopy_fuel",
+      "coordinates": "metres",
+      "direction": "lower"
+    }
+  ],
+  "metric_counts": {
+    "point": 5,
+    "structural": 7,
+    "canopy_fuel": 20,
+    "tree_total": 27,
+    "total": 32
+  },
+  "historical_reproducibility": {
+    "frozen_arrays_are_authoritative": true,
+    "global_generation_seed_recorded": false,
+    "per_sample_generation_seed_recorded": false,
+    "completion_pose_parameters_recorded": false,
+    "per_array_checksums_recorded": false,
+    "recoverable_completion_identity_from_filename": [
+      "mode",
+      "view_index"
+    ],
+    "legacy_metadata_fields": [
+      "treeID",
+      "center",
+      "scale"
+    ],
+    "completion_reference_float32_roundtrip_max_abs_difference_observed": 5.96e-8
+  },
+  "new_generation_provenance_required": [
+    "stable_per_sample_seed",
+    "tree_id",
+    "mode",
+    "view_index",
+    "sampled_pose_or_trajectory_parameters",
+    "generator_version",
+    "dependency_versions",
+    "array_sha256"
+  ]
+}

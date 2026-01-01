@@ -1,0 +1,3143 @@
+{
+  "schema_version": "1.0.0",
+  "registry": "registry.json",
+  "hash_algorithm": "sha256",
+  "policy": {
+    "overlay_allowlist_only": true,
+    "reject_nonempty_materialization_target": true,
+    "reject_hash_mismatch": true,
+    "reject_legal_blocked": true,
+    "excluded": [
+      "data",
+      "symbolic_links",
+      ".git",
+      "logs",
+      "checkpoints",
+      "notebooks",
+      "__pycache__",
+      "*.pyc",
+      "*.so",
+      "build",
+      ".deps"
+    ],
+    "bundled_third_party_license_texts": true,
+    "legal_blocked_payload_absent": true
+  },
+  "baseline_status": {
+    "pu_gcn": {
+      "status": "LEGAL_BLOCKED",
+      "missing_required_files": [
+        "models/pugcn_torch.py"
+      ]
+    },
+    "pointr": {
+      "status": "READY",
+      "missing_required_files": []
+    },
+    "adapointr": {
+      "status": "READY",
+      "overlay_id": "pointr",
+      "missing_required_files": []
+    },
+    "snowflakenet": {
+      "status": "READY",
+      "missing_required_files": []
+    },
+    "pucrn": {
+      "status": "READY",
+      "missing_required_files": []
+    },
+    "neural_points": {
+      "status": "LEGAL_BLOCKED",
+      "missing_required_files": [
+        "code/torch_tensor_functions.py",
+        "model/conpu_v6/network.py"
+      ]
+    },
+    "anchorformer": {
+      "status": "LEGAL_BLOCKED",
+      "missing_required_files": [
+        "extensions/expansion_penalty/expansion_penalty_module.py",
+        "models/AnchorFormer.py",
+        "models/EdgeConv.py",
+        "models/Morphing.py"
+      ]
+    },
+    "pu_flow": {
+      "status": "READY",
+      "missing_required_files": []
+    },
+    "svdformer": {
+      "status": "READY",
+      "missing_required_files": []
+    },
+    "odgnet": {
+      "status": "LEGAL_BLOCKED",
+      "missing_required_files": [
+        "datasets/__init__.py",
+        "main.py",
+        "tools/__init__.py",
+        "tools/builder.py"
+      ]
+    },
+    "repkpu": {
+      "status": "READY",
+      "missing_required_files": []
+    },
+    "pudm": {
+      "status": "READY",
+      "missing_required_files": []
+    },
+    "fsc": {
+      "status": "READY",
+      "missing_required_files": []
+    },
+    "spu_pmd": {
+      "status": "LEGAL_BLOCKED",
+      "missing_required_files": [
+        "losses/setup.py",
+        "network/SPUPMD.py",
+        "network/up_mesh.py",
+        "utils/MeshUtil.py"
+      ]
+    },
+    "geoformer": {
+      "status": "READY",
+      "missing_required_files": []
+    },
+    "pufm": {
+      "status": "LEGAL_BLOCKED",
+      "missing_required_files": [
+        "models/pointnet2_util.py",
+        "models/utils.py"
+      ]
+    }
+  },
+  "summary": {
+    "payload_files": 152,
+    "legal_blocked_files": 17,
+    "materializable_baselines": 10,
+    "evaluation_ready_baselines": 10,
+    "training_launchable_baselines": 9,
+    "training_open_baselines": 1,
+    "legal_blocked_baselines": 6,
+    "bundled_third_party_license_texts": 9
+  },
+  "files": [
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "analyze_treebench_taxonomy.py",
+      "destination_path": "analyze_treebench_taxonomy.py",
+      "payload_path": "baselines/overlays/fsc/analyze_treebench_taxonomy.py",
+      "classification": "treebench_evaluation_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "62edea0bac2ed100f64ab7e16094824d439c4dbd641ef7f79e7bcd4b2aee72b3",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_args.py",
+      "destination_path": "cfgs/upsampling/TreeBench_args.py",
+      "payload_path": "baselines/overlays/fsc/cfgs/upsampling/TreeBench_args.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "0b8c3b29de1c496d6b732ef19dbc636e9cfc33041d2a2233eae5360042d10808",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "payload_path": "baselines/overlays/fsc/cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01ad3e2124953db26b326965d8c320be4335a6551e9922e78ea49fecbf203b53",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "payload_path": "baselines/overlays/fsc/cfgs/upsampling/TreeBench_completion_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "cf76ab64e8bdc4bb00589d0e1b4ba72a6ad0d8138f4fa31e16caee5f1651724b",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "payload_path": "baselines/overlays/fsc/cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "ddee6f2ae1079ff126643338015c4cb5940ea9cfdb60c98aa5e7da95ca52fbf8",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "payload_path": "baselines/overlays/fsc/cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01f800a0febc03e8f3066ba4abe94ab0bba0de556906f63d77622773200952da",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "payload_path": "baselines/overlays/fsc/cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "74881fc3bcd661732473bcbec9c73ce969b7a980fdabd5df48dd4c68ff743129",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "payload_path": "baselines/overlays/fsc/cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "83923d2e809d1fbaaefe5eabd186f6414f0abe72009e82f378743e72c5a42102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "cfgs/upsampling/__init__.py",
+      "destination_path": "cfgs/upsampling/__init__.py",
+      "payload_path": "baselines/overlays/fsc/cfgs/upsampling/__init__.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "43fe8d012bbce7e50d240f669c74b59b89557777156c89ce094dffc209b30f59",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "cfgs/utils.py",
+      "destination_path": "cfgs/utils.py",
+      "payload_path": "baselines/overlays/fsc/cfgs/utils.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f7ab4b9873f43b5ccdfadf622da72fe1a9a765870aed63375c07807aae734402",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "dataset/TreeBench.py",
+      "destination_path": "dataset/TreeBench.py",
+      "payload_path": "baselines/overlays/fsc/dataset/TreeBench.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "e9b1940ea4c1a1df1a3e173df091de6d30415b96b07b9f82e4d45ea53f997386",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "dataset/dataset_utils.py",
+      "destination_path": "dataset/dataset_utils.py",
+      "payload_path": "baselines/overlays/fsc/dataset/dataset_utils.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "8c405d908d028d8923571f97db16c6a98f488acdfc0f1fe981fe5b1888f54e2d",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "metrics/__init__.py",
+      "destination_path": "metrics/__init__.py",
+      "payload_path": "baselines/overlays/fsc/metrics/__init__.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "ef4a665a9b074b49f9aeac943817142485681c653a71fbf64a9e8f93988c44a1",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "metrics/tree_metrics.py",
+      "destination_path": "metrics/tree_metrics.py",
+      "payload_path": "baselines/overlays/fsc/metrics/tree_metrics.py",
+      "classification": "treebench_metric_implementation",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "3082fcb831dd93d52c35f172acf87ce45953038d0cacf820269f93b7d72ac102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "models/FSCSVD.py",
+      "destination_path": "models/FSCSVD.py",
+      "payload_path": "baselines/overlays/fsc/models/FSCSVD.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "aa4ec3de4eae5294c2eacf7de220a971db0886a4dcc559e758e5d574c359959e",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "source_path": "train_treebench_ddp.py",
+      "destination_path": "train_treebench_ddp.py",
+      "payload_path": "baselines/overlays/fsc/train_treebench_ddp.py",
+      "classification": "treebench_train_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "8c4ad58f6dc91ef0c1b29428c76c00c23cbf5b13805a205268caaa47c70da59a",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_args.py",
+      "destination_path": "cfgs/upsampling/TreeBench_args.py",
+      "payload_path": "baselines/overlays/geoformer/cfgs/upsampling/TreeBench_args.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "0b8c3b29de1c496d6b732ef19dbc636e9cfc33041d2a2233eae5360042d10808",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "payload_path": "baselines/overlays/geoformer/cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01ad3e2124953db26b326965d8c320be4335a6551e9922e78ea49fecbf203b53",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "payload_path": "baselines/overlays/geoformer/cfgs/upsampling/TreeBench_completion_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "cf76ab64e8bdc4bb00589d0e1b4ba72a6ad0d8138f4fa31e16caee5f1651724b",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "payload_path": "baselines/overlays/geoformer/cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "ddee6f2ae1079ff126643338015c4cb5940ea9cfdb60c98aa5e7da95ca52fbf8",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "payload_path": "baselines/overlays/geoformer/cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01f800a0febc03e8f3066ba4abe94ab0bba0de556906f63d77622773200952da",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "payload_path": "baselines/overlays/geoformer/cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "74881fc3bcd661732473bcbec9c73ce969b7a980fdabd5df48dd4c68ff743129",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "payload_path": "baselines/overlays/geoformer/cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "83923d2e809d1fbaaefe5eabd186f6414f0abe72009e82f378743e72c5a42102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "cfgs/upsampling/__init__.py",
+      "destination_path": "cfgs/upsampling/__init__.py",
+      "payload_path": "baselines/overlays/geoformer/cfgs/upsampling/__init__.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "43fe8d012bbce7e50d240f669c74b59b89557777156c89ce094dffc209b30f59",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "cfgs/utils.py",
+      "destination_path": "cfgs/utils.py",
+      "payload_path": "baselines/overlays/geoformer/cfgs/utils.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f7ab4b9873f43b5ccdfadf622da72fe1a9a765870aed63375c07807aae734402",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "dataset/TreeBench.py",
+      "destination_path": "dataset/TreeBench.py",
+      "payload_path": "baselines/overlays/geoformer/dataset/TreeBench.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "e9b1940ea4c1a1df1a3e173df091de6d30415b96b07b9f82e4d45ea53f997386",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "dataset/dataset_utils.py",
+      "destination_path": "dataset/dataset_utils.py",
+      "payload_path": "baselines/overlays/geoformer/dataset/dataset_utils.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "8c405d908d028d8923571f97db16c6a98f488acdfc0f1fe981fe5b1888f54e2d",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "src/analyze_treebench_taxonomy.py",
+      "destination_path": "src/analyze_treebench_taxonomy.py",
+      "payload_path": "baselines/overlays/geoformer/src/analyze_treebench_taxonomy.py",
+      "classification": "treebench_evaluation_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "cb2cea2b66a9b23ecf24020549934512b0026c6d1c175a8c75184ce0d2125d1b",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "src/metrics/CD/chamfer3D/setup.py",
+      "destination_path": "src/metrics/CD/chamfer3D/setup.py",
+      "payload_path": "baselines/overlays/geoformer/src/metrics/CD/chamfer3D/setup.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "ce0c2ea070c1dd196c7a8980bbd3fe054c5952cdb9bda7ff7a2b709e7a370898",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "src/metrics/tree_metrics.py",
+      "destination_path": "src/metrics/tree_metrics.py",
+      "payload_path": "baselines/overlays/geoformer/src/metrics/tree_metrics.py",
+      "classification": "treebench_metric_implementation",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "3082fcb831dd93d52c35f172acf87ce45953038d0cacf820269f93b7d72ac102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "src/models/SVDFormer.py",
+      "destination_path": "src/models/SVDFormer.py",
+      "payload_path": "baselines/overlays/geoformer/src/models/SVDFormer.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "c861b14baaf15c112b9519ef7628d6d35a719dab8b1ac64183881ccedd5b6bd2",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "source_path": "src/train_treebench_ddp.py",
+      "destination_path": "src/train_treebench_ddp.py",
+      "payload_path": "baselines/overlays/geoformer/src/train_treebench_ddp.py",
+      "classification": "treebench_train_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "c6dc4bb614e288a3faf2a5d459d637ad7ab34e0631efcb2ac3dd4adc6451ecdd",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "analyze_treebench_taxonomy.py",
+      "destination_path": "analyze_treebench_taxonomy.py",
+      "payload_path": "baselines/overlays/pointr/analyze_treebench_taxonomy.py",
+      "classification": "treebench_evaluation_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "39572e669a366220b57292111570ce1e1aa7a105213d4a3c14e124a34eb27c8a",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/AdaPoinTr/completion_genus_ood.yaml",
+      "destination_path": "cfgs/TreeBench_models/AdaPoinTr/completion_genus_ood.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/AdaPoinTr/completion_genus_ood.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "e41445249912f084361aa3094eb177f7d625f54ac1c900ab1bf49834d9c7884c",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/AdaPoinTr/completion_random.yaml",
+      "destination_path": "cfgs/TreeBench_models/AdaPoinTr/completion_random.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/AdaPoinTr/completion_random.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "595c78ce59ffb82beca68b4550e60e23272f8a70cb486ddb54517d753d43dc4f",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/AdaPoinTr/upsampling_16x_genus_ood.yaml",
+      "destination_path": "cfgs/TreeBench_models/AdaPoinTr/upsampling_16x_genus_ood.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/AdaPoinTr/upsampling_16x_genus_ood.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "80b4408fe40cf4caf11fb3faff71be3b05f44d8ac290b8852df56e07dc08e5cd",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/AdaPoinTr/upsampling_16x_random.yaml",
+      "destination_path": "cfgs/TreeBench_models/AdaPoinTr/upsampling_16x_random.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/AdaPoinTr/upsampling_16x_random.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f491aafdc452f6c9ed28da570704a790e40a3878d146643f99bb3192c62e413a",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/AdaPoinTr/upsampling_4x_genus_ood.yaml",
+      "destination_path": "cfgs/TreeBench_models/AdaPoinTr/upsampling_4x_genus_ood.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/AdaPoinTr/upsampling_4x_genus_ood.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "5e06a2d77683a544932e7dd8ee5dcc40e816a6507fd00f59f3ff66648b8ffe64",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/AdaPoinTr/upsampling_4x_random.yaml",
+      "destination_path": "cfgs/TreeBench_models/AdaPoinTr/upsampling_4x_random.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/AdaPoinTr/upsampling_4x_random.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "475b7a26a1c859ead6f46a7d8bc9d53cbf12918c3f825e4d8c4bead9c20e0e2f",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/PoinTr/completion_genus_ood.yaml",
+      "destination_path": "cfgs/TreeBench_models/PoinTr/completion_genus_ood.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/PoinTr/completion_genus_ood.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "450fe4cc678554ca0247a160c784b39cf4ebe9c301974dc83242d9094301f7dd",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/PoinTr/completion_random.yaml",
+      "destination_path": "cfgs/TreeBench_models/PoinTr/completion_random.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/PoinTr/completion_random.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "a76dacaa550a174344e8c08c6dd0eec4441afbc23e96576b9c3980fd44a55a4c",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/PoinTr/upsampling_16x_genus_ood.yaml",
+      "destination_path": "cfgs/TreeBench_models/PoinTr/upsampling_16x_genus_ood.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/PoinTr/upsampling_16x_genus_ood.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "08135c0a4c1f7be720c9c67481dca592290737da6e1fa9ad533b3df573c206f8",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/PoinTr/upsampling_16x_random.yaml",
+      "destination_path": "cfgs/TreeBench_models/PoinTr/upsampling_16x_random.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/PoinTr/upsampling_16x_random.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "ae713b39330972accfe0b553aadd26c228a269c4117862064ab51bd98c1a863a",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/PoinTr/upsampling_4x_genus_ood.yaml",
+      "destination_path": "cfgs/TreeBench_models/PoinTr/upsampling_4x_genus_ood.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/PoinTr/upsampling_4x_genus_ood.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "9d029c5bfc029e5f3cac8e9963f53ff4ccc1b82a6525151ce302727896d77415",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/TreeBench_models/PoinTr/upsampling_4x_random.yaml",
+      "destination_path": "cfgs/TreeBench_models/PoinTr/upsampling_4x_random.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/TreeBench_models/PoinTr/upsampling_4x_random.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "426ee746a5a3add97b4bb3917ba2f891192399a8644ec260c08490ab63230286",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/dataset_configs/TreeBench_completion_genus_ood.yaml",
+      "destination_path": "cfgs/dataset_configs/TreeBench_completion_genus_ood.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/dataset_configs/TreeBench_completion_genus_ood.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "9eee8236a434a827b739f404e14d388b35872b63e93355e2644ee07c4c6b019e",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/dataset_configs/TreeBench_completion_random.yaml",
+      "destination_path": "cfgs/dataset_configs/TreeBench_completion_random.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/dataset_configs/TreeBench_completion_random.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "30a7b764d3e7d8dbf51a50e6a445e4670099db6a9f04e0bdc4336956d6ea538c",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/dataset_configs/TreeBench_upsampling_16x_genus_ood.yaml",
+      "destination_path": "cfgs/dataset_configs/TreeBench_upsampling_16x_genus_ood.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/dataset_configs/TreeBench_upsampling_16x_genus_ood.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "eda9d0876e5c81db9efacb586ca594a90477089ce352b3796f42cc028c5ac137",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/dataset_configs/TreeBench_upsampling_16x_random.yaml",
+      "destination_path": "cfgs/dataset_configs/TreeBench_upsampling_16x_random.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/dataset_configs/TreeBench_upsampling_16x_random.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "e31f60d6b414f790fe205fc61692ba7cddec61d9ce9abe9154b583b2478959b7",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/dataset_configs/TreeBench_upsampling_4x_genus_ood.yaml",
+      "destination_path": "cfgs/dataset_configs/TreeBench_upsampling_4x_genus_ood.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/dataset_configs/TreeBench_upsampling_4x_genus_ood.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "b84281176d961e55badb7df39387d50bb66348c8904aa48c5eaabb34b8801c0b",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "cfgs/dataset_configs/TreeBench_upsampling_4x_random.yaml",
+      "destination_path": "cfgs/dataset_configs/TreeBench_upsampling_4x_random.yaml",
+      "payload_path": "baselines/overlays/pointr/cfgs/dataset_configs/TreeBench_upsampling_4x_random.yaml",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "c60fda6cccd8ab4365c099f2b1b917f880d7a6fdc04df9bcc46501c6cd18fcae",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "datasets/TreeBench.py",
+      "destination_path": "datasets/TreeBench.py",
+      "payload_path": "baselines/overlays/pointr/datasets/TreeBench.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f19246699b9135554b21c3073ba872b2ca3246763efb76c62abb59820d629fc8",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "datasets/TreeBench_completion.py",
+      "destination_path": "datasets/TreeBench_completion.py",
+      "payload_path": "baselines/overlays/pointr/datasets/TreeBench_completion.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "83ab1ab34e74f06adcdcbf1fc54a0f5fc8ec6002e5d7b445568f5dc1a995e4b2",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "datasets/__init__.py",
+      "destination_path": "datasets/__init__.py",
+      "payload_path": "baselines/overlays/pointr/datasets/__init__.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "919930ab527c0c32a839b137170e63503edf5271823b71b3ea62cc09f79ef605",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "datasets/dataset_utils.py",
+      "destination_path": "datasets/dataset_utils.py",
+      "payload_path": "baselines/overlays/pointr/datasets/dataset_utils.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "8c405d908d028d8923571f97db16c6a98f488acdfc0f1fe981fe5b1888f54e2d",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "extensions/chamfer_dist/__init__.py",
+      "destination_path": "extensions/chamfer_dist/__init__.py",
+      "payload_path": "baselines/overlays/pointr/extensions/chamfer_dist/__init__.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "6c45e0ba92d6b6dd842282faeeaaa4113bfcd06fdd6572ee6668477f65a711fd",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "main.py",
+      "destination_path": "main.py",
+      "payload_path": "baselines/overlays/pointr/main.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "c5e123f5b8ed0bfdc5e4af0f3377d8830fc43eaebfe89b7c6e8834d6626c5920",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "metrics/tree_metrics.py",
+      "destination_path": "metrics/tree_metrics.py",
+      "payload_path": "baselines/overlays/pointr/metrics/tree_metrics.py",
+      "classification": "treebench_metric_implementation",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "3082fcb831dd93d52c35f172acf87ce45953038d0cacf820269f93b7d72ac102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "tools/builder.py",
+      "destination_path": "tools/builder.py",
+      "payload_path": "baselines/overlays/pointr/tools/builder.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "21178315ac3bef8540c0e627326d2b19392ff6790fe22a1f69282afa7f3104fc",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "tools/runner_treebench.py",
+      "destination_path": "tools/runner_treebench.py",
+      "payload_path": "baselines/overlays/pointr/tools/runner_treebench.py",
+      "classification": "treebench_runner_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "a758357c52f9277f1880f2dfff080dcfb400089a5948fb4cfef95dd7de1ad348",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "utils/dist_utils.py",
+      "destination_path": "utils/dist_utils.py",
+      "payload_path": "baselines/overlays/pointr/utils/dist_utils.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "268a2f7660f855e6b1f78fe86977a641fd5058b3f35531958e05aadabff272dd",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "utils/metrics.py",
+      "destination_path": "utils/metrics.py",
+      "payload_path": "baselines/overlays/pointr/utils/metrics.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "807c7f38be9b39dfed2596034b368f1f9782b8a9ce653314ac57147eba4f67ba",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "utils/parser.py",
+      "destination_path": "utils/parser.py",
+      "payload_path": "baselines/overlays/pointr/utils/parser.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "a9264a5b5d9034a6e801883cc0b40249e4a523ef8b807b86d9e56eec7eee12dc",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "source_path": "utils/treebench_eval.py",
+      "destination_path": "utils/treebench_eval.py",
+      "payload_path": "baselines/overlays/pointr/utils/treebench_eval.py",
+      "classification": "treebench_runner_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "90a35eea2f08ea3e2aa2678b4f994242627910daea9fe717a6af822d0fa91331",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "analyze_treebench_taxonomy.py",
+      "destination_path": "analyze_treebench_taxonomy.py",
+      "payload_path": "baselines/overlays/pu_flow/analyze_treebench_taxonomy.py",
+      "classification": "treebench_evaluation_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "745b0c644896d952fe2f1a05c2da2c24a3cc816a194c4e4e90a63514dda7a26f",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_args.py",
+      "destination_path": "cfgs/upsampling/TreeBench_args.py",
+      "payload_path": "baselines/overlays/pu_flow/cfgs/upsampling/TreeBench_args.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "0b8c3b29de1c496d6b732ef19dbc636e9cfc33041d2a2233eae5360042d10808",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "payload_path": "baselines/overlays/pu_flow/cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01ad3e2124953db26b326965d8c320be4335a6551e9922e78ea49fecbf203b53",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "payload_path": "baselines/overlays/pu_flow/cfgs/upsampling/TreeBench_completion_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "cf76ab64e8bdc4bb00589d0e1b4ba72a6ad0d8138f4fa31e16caee5f1651724b",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "payload_path": "baselines/overlays/pu_flow/cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "d48b4176b1882035dd59c88c56c0e5276188935170579fc73437a710292e4af9",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "payload_path": "baselines/overlays/pu_flow/cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "8cc795dddf922e68e40e0ff04d852688ec74a3895a06de653fe0cc5b7b220d31",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "payload_path": "baselines/overlays/pu_flow/cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "74881fc3bcd661732473bcbec9c73ce969b7a980fdabd5df48dd4c68ff743129",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "payload_path": "baselines/overlays/pu_flow/cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "83923d2e809d1fbaaefe5eabd186f6414f0abe72009e82f378743e72c5a42102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "cfgs/upsampling/__init__.py",
+      "destination_path": "cfgs/upsampling/__init__.py",
+      "payload_path": "baselines/overlays/pu_flow/cfgs/upsampling/__init__.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "43fe8d012bbce7e50d240f669c74b59b89557777156c89ce094dffc209b30f59",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "cfgs/utils.py",
+      "destination_path": "cfgs/utils.py",
+      "payload_path": "baselines/overlays/pu_flow/cfgs/utils.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f7ab4b9873f43b5ccdfadf622da72fe1a9a765870aed63375c07807aae734402",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "dataset/TreeBench.py",
+      "destination_path": "dataset/TreeBench.py",
+      "payload_path": "baselines/overlays/pu_flow/dataset/TreeBench.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "e9b1940ea4c1a1df1a3e173df091de6d30415b96b07b9f82e4d45ea53f997386",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "dataset/dataset_utils.py",
+      "destination_path": "dataset/dataset_utils.py",
+      "payload_path": "baselines/overlays/pu_flow/dataset/dataset_utils.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "8c405d908d028d8923571f97db16c6a98f488acdfc0f1fe981fe5b1888f54e2d",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "metrics/tree_metrics.py",
+      "destination_path": "metrics/tree_metrics.py",
+      "payload_path": "baselines/overlays/pu_flow/metrics/tree_metrics.py",
+      "classification": "treebench_metric_implementation",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "3082fcb831dd93d52c35f172acf87ce45953038d0cacf820269f93b7d72ac102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "source_path": "train_treebench_ddp.py",
+      "destination_path": "train_treebench_ddp.py",
+      "payload_path": "baselines/overlays/pu_flow/train_treebench_ddp.py",
+      "classification": "treebench_train_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "7d5d69f4c08e7861294e8c397ef6cad2782a84d2342fe4d43b882ebafc0c2bd9",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/analyze_treebench_taxonomy.py",
+      "destination_path": "PointUpsampling/PUCRN/analyze_treebench_taxonomy.py",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/analyze_treebench_taxonomy.py",
+      "classification": "treebench_evaluation_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "0b8a9a3701e99623d3f81967711f4f51a74cb4d01bffda764514886e287c6303",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_args.py",
+      "destination_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_args.py",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_args.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "0b8c3b29de1c496d6b732ef19dbc636e9cfc33041d2a2233eae5360042d10808",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "destination_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01ad3e2124953db26b326965d8c320be4335a6551e9922e78ea49fecbf203b53",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_completion_random.json",
+      "destination_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_completion_random.json",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_completion_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "cf76ab64e8bdc4bb00589d0e1b4ba72a6ad0d8138f4fa31e16caee5f1651724b",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "destination_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "ace2d67730829176a11732b614d6c0c1a150a1aa7bab20aeb6879af740d937bb",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "destination_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "224de771643fa21c06d6444bf042e093235b2fe5931e464de6772f1d1a0eae67",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "destination_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "74881fc3bcd661732473bcbec9c73ce969b7a980fdabd5df48dd4c68ff743129",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "destination_path": "PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "83923d2e809d1fbaaefe5eabd186f6414f0abe72009e82f378743e72c5a42102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/cfgs/upsampling/__init__.py",
+      "destination_path": "PointUpsampling/PUCRN/cfgs/upsampling/__init__.py",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/cfgs/upsampling/__init__.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "43fe8d012bbce7e50d240f669c74b59b89557777156c89ce094dffc209b30f59",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/cfgs/utils.py",
+      "destination_path": "PointUpsampling/PUCRN/cfgs/utils.py",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/cfgs/utils.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f7ab4b9873f43b5ccdfadf622da72fe1a9a765870aed63375c07807aae734402",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/dataset/TreeBench.py",
+      "destination_path": "PointUpsampling/PUCRN/dataset/TreeBench.py",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/dataset/TreeBench.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "e9b1940ea4c1a1df1a3e173df091de6d30415b96b07b9f82e4d45ea53f997386",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/dataset/dataset_utils.py",
+      "destination_path": "PointUpsampling/PUCRN/dataset/dataset_utils.py",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/dataset/dataset_utils.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "8c405d908d028d8923571f97db16c6a98f488acdfc0f1fe981fe5b1888f54e2d",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/metrics/tree_metrics.py",
+      "destination_path": "PointUpsampling/PUCRN/metrics/tree_metrics.py",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/metrics/tree_metrics.py",
+      "classification": "treebench_metric_implementation",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "3082fcb831dd93d52c35f172acf87ce45953038d0cacf820269f93b7d72ac102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "source_path": "PointUpsampling/PUCRN/train_treebench_ddp.py",
+      "destination_path": "PointUpsampling/PUCRN/train_treebench_ddp.py",
+      "payload_path": "baselines/overlays/pucrn/PointUpsampling/PUCRN/train_treebench_ddp.py",
+      "classification": "treebench_train_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "Apache-2.0",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "847adc43880af4d842b65952d2eba7c78782db3e0ab17207a8e63173990d4015",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/analyze_treebench_taxonomy.py",
+      "destination_path": "pointnet2/analyze_treebench_taxonomy.py",
+      "payload_path": "baselines/overlays/pudm/pointnet2/analyze_treebench_taxonomy.py",
+      "classification": "treebench_evaluation_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "16a57927f0c955ecc75174996e250c44e40d2ec7c3ad638b04ee78ff141d9a19",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/dataloader/data_transforms.py",
+      "destination_path": "pointnet2/dataloader/data_transforms.py",
+      "payload_path": "baselines/overlays/pudm/pointnet2/dataloader/data_transforms.py",
+      "classification": "treebench_adapter_dependency",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "cf6883d00cc0a8654b3b6514ee0f64af5a4d6fd36b7cb4a6282f71d20947f9dd",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/dataloader/dataset_loader.py",
+      "destination_path": "pointnet2/dataloader/dataset_loader.py",
+      "payload_path": "baselines/overlays/pudm/pointnet2/dataloader/dataset_loader.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "e7dcbe28ebf47e273ae22229b817bc9dda831b03fb44cddd5e7c233716ea131b",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/dataset.py",
+      "destination_path": "pointnet2/dataset.py",
+      "payload_path": "baselines/overlays/pudm/pointnet2/dataset.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "9c3d7477ebdaa368499f84e7f17558cda250585e5ba2176f89058df8588d95ad",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/eval_treebench.py",
+      "destination_path": "pointnet2/eval_treebench.py",
+      "payload_path": "baselines/overlays/pudm/pointnet2/eval_treebench.py",
+      "classification": "treebench_evaluation_core",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f06ffc2beb5189ed6e981166e2b45d729dc1cd19e3e00a1a60312a0d37a9349a",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/exp_configs/TreeBench_completion_genus_ood.json",
+      "destination_path": "pointnet2/exp_configs/TreeBench_completion_genus_ood.json",
+      "payload_path": "baselines/overlays/pudm/pointnet2/exp_configs/TreeBench_completion_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f19f98d84a781165ded85a40c1f9fc5d6e0d4506270fb4d81e30bb0e616b4709",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/exp_configs/TreeBench_completion_random.json",
+      "destination_path": "pointnet2/exp_configs/TreeBench_completion_random.json",
+      "payload_path": "baselines/overlays/pudm/pointnet2/exp_configs/TreeBench_completion_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "5c673c6996a8ced01517bf669a07a9865ca942f6dae2c1a8e183d622e10cc726",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/exp_configs/TreeBench_upsampling_16x_genus_ood.json",
+      "destination_path": "pointnet2/exp_configs/TreeBench_upsampling_16x_genus_ood.json",
+      "payload_path": "baselines/overlays/pudm/pointnet2/exp_configs/TreeBench_upsampling_16x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f31c78316281c0774e16fbf6c9b4a4b7dd646165052bc4679c526ca2ae9eddaa",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/exp_configs/TreeBench_upsampling_16x_random.json",
+      "destination_path": "pointnet2/exp_configs/TreeBench_upsampling_16x_random.json",
+      "payload_path": "baselines/overlays/pudm/pointnet2/exp_configs/TreeBench_upsampling_16x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "4adc5e5c84f155d35b88ff9cb6da84c567b167891110c14abc9e2bf43a6a5de2",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/exp_configs/TreeBench_upsampling_4x_genus_ood.json",
+      "destination_path": "pointnet2/exp_configs/TreeBench_upsampling_4x_genus_ood.json",
+      "payload_path": "baselines/overlays/pudm/pointnet2/exp_configs/TreeBench_upsampling_4x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "27667f2c0d12de3808f6eae0cce6d65b5cdb3f57ec7f0e0caf384aa076315f17",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/exp_configs/TreeBench_upsampling_4x_random.json",
+      "destination_path": "pointnet2/exp_configs/TreeBench_upsampling_4x_random.json",
+      "payload_path": "baselines/overlays/pudm/pointnet2/exp_configs/TreeBench_upsampling_4x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "fb812f2ab43e1d5469d1fb6a8cb2423d36aedf67d6abab718c49b45387ab6aaa",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/metrics/tree_metrics.py",
+      "destination_path": "pointnet2/metrics/tree_metrics.py",
+      "payload_path": "baselines/overlays/pudm/pointnet2/metrics/tree_metrics.py",
+      "classification": "treebench_metric_implementation",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "3082fcb831dd93d52c35f172acf87ce45953038d0cacf820269f93b7d72ac102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/models/pointnet2_with_pcld_condition.py",
+      "destination_path": "pointnet2/models/pointnet2_with_pcld_condition.py",
+      "payload_path": "baselines/overlays/pudm/pointnet2/models/pointnet2_with_pcld_condition.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "d7f928df63c67f8505ea8eb3bee714b75f882ec147d45ba9fcbfd9847f6acbdf",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/train_treebench.py",
+      "destination_path": "pointnet2/train_treebench.py",
+      "payload_path": "baselines/overlays/pudm/pointnet2/train_treebench.py",
+      "classification": "treebench_train_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "26287539ffcb6d22a2ab2b48cac386ead7ce9fa81a529d5f34a5c3a7725a6f44",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "source_path": "pointnet2/util.py",
+      "destination_path": "pointnet2/util.py",
+      "payload_path": "baselines/overlays/pudm/pointnet2/util.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "9312ea8a141f913abababf7ca60f935428ef99ff8523c600199c9fc36ebe213a",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "analyze_treebench_taxonomy.py",
+      "destination_path": "analyze_treebench_taxonomy.py",
+      "payload_path": "baselines/overlays/repkpu/analyze_treebench_taxonomy.py",
+      "classification": "treebench_evaluation_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "e466e9fb01e39a66c8ad552851188a696b058a7f3cc9dae1e7ab4ccdd53b6b54",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_args.py",
+      "destination_path": "cfgs/upsampling/TreeBench_args.py",
+      "payload_path": "baselines/overlays/repkpu/cfgs/upsampling/TreeBench_args.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "a3f889f601e59b05fc72a9c34a0b3cd0b5ce5dafa52528f09d18af8058ba9f3f",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "payload_path": "baselines/overlays/repkpu/cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01ad3e2124953db26b326965d8c320be4335a6551e9922e78ea49fecbf203b53",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "payload_path": "baselines/overlays/repkpu/cfgs/upsampling/TreeBench_completion_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "cf76ab64e8bdc4bb00589d0e1b4ba72a6ad0d8138f4fa31e16caee5f1651724b",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "payload_path": "baselines/overlays/repkpu/cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "ace2d67730829176a11732b614d6c0c1a150a1aa7bab20aeb6879af740d937bb",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "payload_path": "baselines/overlays/repkpu/cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "224de771643fa21c06d6444bf042e093235b2fe5931e464de6772f1d1a0eae67",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "payload_path": "baselines/overlays/repkpu/cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "74881fc3bcd661732473bcbec9c73ce969b7a980fdabd5df48dd4c68ff743129",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "payload_path": "baselines/overlays/repkpu/cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "83923d2e809d1fbaaefe5eabd186f6414f0abe72009e82f378743e72c5a42102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "cfgs/upsampling/__init__.py",
+      "destination_path": "cfgs/upsampling/__init__.py",
+      "payload_path": "baselines/overlays/repkpu/cfgs/upsampling/__init__.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "43fe8d012bbce7e50d240f669c74b59b89557777156c89ce094dffc209b30f59",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "cfgs/utils.py",
+      "destination_path": "cfgs/utils.py",
+      "payload_path": "baselines/overlays/repkpu/cfgs/utils.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f7ab4b9873f43b5ccdfadf622da72fe1a9a765870aed63375c07807aae734402",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "dataset/TreeBench.py",
+      "destination_path": "dataset/TreeBench.py",
+      "payload_path": "baselines/overlays/repkpu/dataset/TreeBench.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "e9b1940ea4c1a1df1a3e173df091de6d30415b96b07b9f82e4d45ea53f997386",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "dataset/dataset_utils.py",
+      "destination_path": "dataset/dataset_utils.py",
+      "payload_path": "baselines/overlays/repkpu/dataset/dataset_utils.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "8c405d908d028d8923571f97db16c6a98f488acdfc0f1fe981fe5b1888f54e2d",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "metrics/tree_metrics.py",
+      "destination_path": "metrics/tree_metrics.py",
+      "payload_path": "baselines/overlays/repkpu/metrics/tree_metrics.py",
+      "classification": "treebench_metric_implementation",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "b0222befd816d5cbd8a31cf6bf628f896a06bf71a54a5380afc9fd8c32111108",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "models/utils.py",
+      "destination_path": "models/utils.py",
+      "payload_path": "baselines/overlays/repkpu/models/utils.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "bf8db9e94277c30aaa376402f35c0dab70ed65e719ec2f6ca5766aaa2cd5ccbc",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "source_path": "train_TreeBench_ddp.py",
+      "destination_path": "train_TreeBench_ddp.py",
+      "payload_path": "baselines/overlays/repkpu/train_TreeBench_ddp.py",
+      "classification": "treebench_train_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "de4bae894fe4a2ab885462760cb0c06fe41d58cf2357295c9987428cc79e25b6",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "analyze_treebench_taxonomy.py",
+      "destination_path": "analyze_treebench_taxonomy.py",
+      "payload_path": "baselines/overlays/snowflakenet/analyze_treebench_taxonomy.py",
+      "classification": "treebench_evaluation_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "5613d6ce40e48255b63d9934bcdebb18331d38a87cf430456f4300d5dcd63a27",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_args.py",
+      "destination_path": "cfgs/upsampling/TreeBench_args.py",
+      "payload_path": "baselines/overlays/snowflakenet/cfgs/upsampling/TreeBench_args.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "0b8c3b29de1c496d6b732ef19dbc636e9cfc33041d2a2233eae5360042d10808",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "payload_path": "baselines/overlays/snowflakenet/cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01ad3e2124953db26b326965d8c320be4335a6551e9922e78ea49fecbf203b53",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "payload_path": "baselines/overlays/snowflakenet/cfgs/upsampling/TreeBench_completion_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "cf76ab64e8bdc4bb00589d0e1b4ba72a6ad0d8138f4fa31e16caee5f1651724b",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "payload_path": "baselines/overlays/snowflakenet/cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "ddee6f2ae1079ff126643338015c4cb5940ea9cfdb60c98aa5e7da95ca52fbf8",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "payload_path": "baselines/overlays/snowflakenet/cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01f800a0febc03e8f3066ba4abe94ab0bba0de556906f63d77622773200952da",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "payload_path": "baselines/overlays/snowflakenet/cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "74881fc3bcd661732473bcbec9c73ce969b7a980fdabd5df48dd4c68ff743129",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "payload_path": "baselines/overlays/snowflakenet/cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "83923d2e809d1fbaaefe5eabd186f6414f0abe72009e82f378743e72c5a42102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "cfgs/upsampling/__init__.py",
+      "destination_path": "cfgs/upsampling/__init__.py",
+      "payload_path": "baselines/overlays/snowflakenet/cfgs/upsampling/__init__.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "43fe8d012bbce7e50d240f669c74b59b89557777156c89ce094dffc209b30f59",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "cfgs/utils.py",
+      "destination_path": "cfgs/utils.py",
+      "payload_path": "baselines/overlays/snowflakenet/cfgs/utils.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f7ab4b9873f43b5ccdfadf622da72fe1a9a765870aed63375c07807aae734402",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "dataset/TreeBench.py",
+      "destination_path": "dataset/TreeBench.py",
+      "payload_path": "baselines/overlays/snowflakenet/dataset/TreeBench.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "e9b1940ea4c1a1df1a3e173df091de6d30415b96b07b9f82e4d45ea53f997386",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "dataset/dataset_utils.py",
+      "destination_path": "dataset/dataset_utils.py",
+      "payload_path": "baselines/overlays/snowflakenet/dataset/dataset_utils.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "8c405d908d028d8923571f97db16c6a98f488acdfc0f1fe981fe5b1888f54e2d",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "metrics/tree_metrics.py",
+      "destination_path": "metrics/tree_metrics.py",
+      "payload_path": "baselines/overlays/snowflakenet/metrics/tree_metrics.py",
+      "classification": "treebench_metric_implementation",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "3082fcb831dd93d52c35f172acf87ce45953038d0cacf820269f93b7d72ac102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "source_path": "train_treebench_ddp.py",
+      "destination_path": "train_treebench_ddp.py",
+      "payload_path": "baselines/overlays/snowflakenet/train_treebench_ddp.py",
+      "classification": "treebench_train_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "b58ff8a4a2e625cfaff4a0142ed6643ec3387c655e5439535bb6007b6be340fe",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "analyze_treebench_taxonomy.py",
+      "destination_path": "analyze_treebench_taxonomy.py",
+      "payload_path": "baselines/overlays/svdformer/analyze_treebench_taxonomy.py",
+      "classification": "treebench_evaluation_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "88d57d2d8717cd706b40e03a04aef4a3af28580c88db07b4044ccfec55de935e",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_args.py",
+      "destination_path": "cfgs/upsampling/TreeBench_args.py",
+      "payload_path": "baselines/overlays/svdformer/cfgs/upsampling/TreeBench_args.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "0b8c3b29de1c496d6b732ef19dbc636e9cfc33041d2a2233eae5360042d10808",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "payload_path": "baselines/overlays/svdformer/cfgs/upsampling/TreeBench_completion_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01ad3e2124953db26b326965d8c320be4335a6551e9922e78ea49fecbf203b53",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_completion_random.json",
+      "payload_path": "baselines/overlays/svdformer/cfgs/upsampling/TreeBench_completion_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "cf76ab64e8bdc4bb00589d0e1b4ba72a6ad0d8138f4fa31e16caee5f1651724b",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "payload_path": "baselines/overlays/svdformer/cfgs/upsampling/TreeBench_upsampling_16x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "ddee6f2ae1079ff126643338015c4cb5940ea9cfdb60c98aa5e7da95ca52fbf8",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "payload_path": "baselines/overlays/svdformer/cfgs/upsampling/TreeBench_upsampling_16x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "01f800a0febc03e8f3066ba4abe94ab0bba0de556906f63d77622773200952da",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "payload_path": "baselines/overlays/svdformer/cfgs/upsampling/TreeBench_upsampling_4x_genus_ood.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "74881fc3bcd661732473bcbec9c73ce969b7a980fdabd5df48dd4c68ff743129",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "destination_path": "cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "payload_path": "baselines/overlays/svdformer/cfgs/upsampling/TreeBench_upsampling_4x_random.json",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "83923d2e809d1fbaaefe5eabd186f6414f0abe72009e82f378743e72c5a42102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "cfgs/upsampling/__init__.py",
+      "destination_path": "cfgs/upsampling/__init__.py",
+      "payload_path": "baselines/overlays/svdformer/cfgs/upsampling/__init__.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "43fe8d012bbce7e50d240f669c74b59b89557777156c89ce094dffc209b30f59",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "cfgs/utils.py",
+      "destination_path": "cfgs/utils.py",
+      "payload_path": "baselines/overlays/svdformer/cfgs/utils.py",
+      "classification": "treebench_configuration",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "f7ab4b9873f43b5ccdfadf622da72fe1a9a765870aed63375c07807aae734402",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "dataset/TreeBench.py",
+      "destination_path": "dataset/TreeBench.py",
+      "payload_path": "baselines/overlays/svdformer/dataset/TreeBench.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "e9b1940ea4c1a1df1a3e173df091de6d30415b96b07b9f82e4d45ea53f997386",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "dataset/dataset_utils.py",
+      "destination_path": "dataset/dataset_utils.py",
+      "payload_path": "baselines/overlays/svdformer/dataset/dataset_utils.py",
+      "classification": "treebench_dataset_adapter",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "8c405d908d028d8923571f97db16c6a98f488acdfc0f1fe981fe5b1888f54e2d",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "metrics/CD/chamfer3D/dist_chamfer_3D.py",
+      "destination_path": "metrics/CD/chamfer3D/dist_chamfer_3D.py",
+      "payload_path": "baselines/overlays/svdformer/metrics/CD/chamfer3D/dist_chamfer_3D.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "420b4ec5e743d3a9df8d8c7bc3c082ab572fa1d7d7556cc37b34f1c610498581",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "metrics/tree_metrics.py",
+      "destination_path": "metrics/tree_metrics.py",
+      "payload_path": "baselines/overlays/svdformer/metrics/tree_metrics.py",
+      "classification": "treebench_metric_implementation",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "3082fcb831dd93d52c35f172acf87ce45953038d0cacf820269f93b7d72ac102",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "models/SVDFormer.py",
+      "destination_path": "models/SVDFormer.py",
+      "payload_path": "baselines/overlays/svdformer/models/SVDFormer.py",
+      "classification": "upstream_compatibility_override",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "upstream_licensed_override"
+      },
+      "sha256": "6e775d2b89aad0dec9ba0c95e48a90324242df0b83bb77f00cccec51f8eaf757",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "source_path": "train_treebench_ddp.py",
+      "destination_path": "train_treebench_ddp.py",
+      "payload_path": "baselines/overlays/svdformer/train_treebench_ddp.py",
+      "classification": "treebench_train_entrypoint",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "found",
+        "spdx": "MIT",
+        "payload_basis": "treebench_integration"
+      },
+      "sha256": "ef48d3ecbb2b3c3fcb7b4842ac8a5d27c83599292940bcee2adc84265babd4e8",
+      "materialize": true
+    },
+    {
+      "model_ids": [
+        "pu_gcn"
+      ],
+      "source_path": "models/pugcn_torch.py",
+      "destination_path": "models/pugcn_torch.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_added",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "2c576af3657822fa6b7e1aaac6baf05156f014cd01efd5e4524f78892d2ac85c",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "neural_points"
+      ],
+      "source_path": "code/torch_tensor_functions.py",
+      "destination_path": "code/torch_tensor_functions.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "f2c510542a4a8adc18ebad0c5ba241da0238479c8cfca069d2e8809370f6071d",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "neural_points"
+      ],
+      "source_path": "model/conpu_v6/network.py",
+      "destination_path": "model/conpu_v6/network.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "9f899f6cb2a1419ac109936a1e2b2da2d00f417e49796f96b0f3d570e54ad228",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "anchorformer"
+      ],
+      "source_path": "extensions/expansion_penalty/expansion_penalty_module.py",
+      "destination_path": "extensions/expansion_penalty/expansion_penalty_module.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "4f5ea3387cd45137dd49512d9caaca41daae5194595a466f924a14c6742c29fc",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "anchorformer"
+      ],
+      "source_path": "models/AnchorFormer.py",
+      "destination_path": "models/AnchorFormer.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "1f97a4b4b1b68d9a0f5d5f06fc926528e0629909584f4e5358fdc7d47e3ee046",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "anchorformer"
+      ],
+      "source_path": "models/EdgeConv.py",
+      "destination_path": "models/EdgeConv.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "aa7f3e0cc687193a2830356a48aff6f26038fd586639f64d26ca0564d8e7c06f",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "anchorformer"
+      ],
+      "source_path": "models/Morphing.py",
+      "destination_path": "models/Morphing.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "be2a7278f8673e2d78aa9a9adc9cfc7308829efdbdaf2cdacb1c564b4741ebb7",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "odgnet"
+      ],
+      "source_path": "datasets/__init__.py",
+      "destination_path": "datasets/__init__.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "9d42b205c412f4ee777f4c165ef668c77f87d98b4059aa79b3d0afc55552e23c",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "odgnet"
+      ],
+      "source_path": "main.py",
+      "destination_path": "main.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "328d70604b5cda7d32b786f7e581452bb1a2273988b3c1403b574271315eb747",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "odgnet"
+      ],
+      "source_path": "tools/__init__.py",
+      "destination_path": "tools/__init__.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "48ab4c47a177dec2eaaa2bcfe5f67591c73df6490cf6d93a3ddf8450e5d0f165",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "odgnet"
+      ],
+      "source_path": "tools/builder.py",
+      "destination_path": "tools/builder.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "e1d517cd42bc5a7ba3ac70dab0c1d117fa97977f5979312956fd8aeace0ef5aa",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "spu_pmd"
+      ],
+      "source_path": "losses/setup.py",
+      "destination_path": "losses/setup.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "bcf6d50242aef4d4944ae0ae60be0926966f89afc689299ec0b837481f516d43",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "spu_pmd"
+      ],
+      "source_path": "network/SPUPMD.py",
+      "destination_path": "network/SPUPMD.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "e92288d7af283dd7374e22ec68a0bcffdca112db6fc53d1e446ca53c82b96cbf",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "spu_pmd"
+      ],
+      "source_path": "network/up_mesh.py",
+      "destination_path": "network/up_mesh.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "703221054883fe8bb1966d5142b44d883312fe0722420b9aff309069783b02b5",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "spu_pmd"
+      ],
+      "source_path": "utils/MeshUtil.py",
+      "destination_path": "utils/MeshUtil.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "55632a485fccb69882b687fa7080c3d90e3cae9f077fa5db6c4295e8b01c30b5",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "pufm"
+      ],
+      "source_path": "models/pointnet2_util.py",
+      "destination_path": "models/pointnet2_util.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "eee9942956066f9a3db8ecf7c8e0078b19ced2c532b1306d284c89d47c6c2fc6",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    },
+    {
+      "model_ids": [
+        "pufm"
+      ],
+      "source_path": "models/utils.py",
+      "destination_path": "models/utils.py",
+      "payload_path": null,
+      "classification": "LEGAL_BLOCKED",
+      "source_state": "working_tree_modified",
+      "license_status": {
+        "upstream": "not_found_in_upstream_checkout",
+        "spdx": null,
+        "payload_basis": "not_redistributed"
+      },
+      "sha256": "8ec753ada96c647b0b33277590f4f72079088eec797a072e82f3e04da588b544",
+      "materialize": false,
+      "reason": "This implementation or required source override is not redistributed because the upstream checkout contains no license."
+    }
+  ],
+  "third_party_licenses": [
+    {
+      "model_ids": [
+        "pointr",
+        "adapointr"
+      ],
+      "spdx": "MIT",
+      "upstream_source_path": "LICENSE",
+      "bundled_path": "baselines/third_party_licenses/pointr/LICENSE",
+      "sha256": "2d42a25a0e80f1117901c7dc1e59f75015592490ca19fd1c6c89223295f7b94d",
+      "notice_status": "not_applicable"
+    },
+    {
+      "model_ids": [
+        "snowflakenet"
+      ],
+      "spdx": "MIT",
+      "upstream_source_path": "LICENSE",
+      "bundled_path": "baselines/third_party_licenses/snowflakenet/LICENSE",
+      "sha256": "e23dae274a793c8634064a9ab0e700bdbe95d1f45bd203c02105f312edec8336",
+      "notice_status": "not_applicable"
+    },
+    {
+      "model_ids": [
+        "pucrn"
+      ],
+      "spdx": "Apache-2.0",
+      "upstream_source_path": "PointUpsampling/PUCRN/LICENSE",
+      "bundled_path": "baselines/third_party_licenses/pucrn/LICENSE",
+      "sha256": "f44d9c7dbb06aeb74eeb768e830a9c9db09dbc4fd83cb7e15e016c6c5af03d19",
+      "notice_status": "not_present_at_pinned_commit"
+    },
+    {
+      "model_ids": [
+        "pu_flow"
+      ],
+      "spdx": "MIT",
+      "upstream_source_path": "LICENSE",
+      "bundled_path": "baselines/third_party_licenses/pu_flow/LICENSE",
+      "sha256": "a4a9f654f49e5f0abcb56928a73ba9885d90e4a2f4d6129258f00edabca76f13",
+      "notice_status": "not_applicable"
+    },
+    {
+      "model_ids": [
+        "svdformer"
+      ],
+      "spdx": "MIT",
+      "upstream_source_path": "LICENSE",
+      "bundled_path": "baselines/third_party_licenses/svdformer/LICENSE",
+      "sha256": "898f00744042f0ad94524a6b28471fd79b98892c98ed0751bf40fe4dda45347f",
+      "notice_status": "not_applicable"
+    },
+    {
+      "model_ids": [
+        "repkpu"
+      ],
+      "spdx": "MIT",
+      "upstream_source_path": "LICENSE",
+      "bundled_path": "baselines/third_party_licenses/repkpu/LICENSE",
+      "sha256": "f90b9983b9513b493270f53ed318af69efa963f09a048edf47cae55d9c18d20e",
+      "notice_status": "not_applicable"
+    },
+    {
+      "model_ids": [
+        "pudm"
+      ],
+      "spdx": "MIT",
+      "upstream_source_path": "LICENSE",
+      "bundled_path": "baselines/third_party_licenses/pudm/LICENSE",
+      "sha256": "9b2c98f126b1ad7ecfdba1f98bddb75f698f9ea733dd5cc76ca84c6f02f9d7a4",
+      "notice_status": "not_applicable"
+    },
+    {
+      "model_ids": [
+        "fsc"
+      ],
+      "spdx": "MIT",
+      "upstream_source_path": "LICENSE",
+      "bundled_path": "baselines/third_party_licenses/fsc/LICENSE",
+      "sha256": "898f00744042f0ad94524a6b28471fd79b98892c98ed0751bf40fe4dda45347f",
+      "notice_status": "not_applicable"
+    },
+    {
+      "model_ids": [
+        "geoformer"
+      ],
+      "spdx": "MIT",
+      "upstream_source_path": "src/LICENSE",
+      "bundled_path": "baselines/third_party_licenses/geoformer/LICENSE",
+      "sha256": "898f00744042f0ad94524a6b28471fd79b98892c98ed0751bf40fe4dda45347f",
+      "notice_status": "not_applicable"
+    }
+  ]
+}
