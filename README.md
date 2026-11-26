@@ -1,4 +1,6 @@
-# TreeBench: Anonymous Review Release
+# TreeBench: Evaluating Canopy Structure Preservation in Tree Point Cloud Reconstruction
+
+**Accepted at the 4th Workshop on Computer Vision for Earth Observation Applications (CV4EO), WACV 2027.**
 
 TreeBench evaluates point-cloud upsampling and completion on dense observed
 individual trees. It fixes the data splits, constructs sparse and
@@ -6,12 +8,10 @@ view-conditioned inputs from one 8,192-point observed reference per tree, and
 evaluates every reconstruction with 32 point, tree-structural, and canopy-fuel
 geometry metrics.
 
-This repository is an anonymous review artifact. It contains the benchmark
-protocol, deterministic data-generation code, the two frozen split manifests,
-a shared evaluator, a synthetic smoke fixture, tests, and integration metadata
-for the 16 models reported in the paper. It does not contain source point
-clouds, derived benchmark arrays, pretrained weights, experiment logs, or Git
-history.
+This repository contains the benchmark protocol, deterministic data-generation
+code, two frozen split manifests, a shared evaluator, a synthetic smoke fixture,
+tests, and integration metadata for 16 baselines. It does not contain source
+point clouds, derived benchmark arrays, pretrained weights, or experiment logs.
 
 ## Pipeline
 
@@ -60,8 +60,7 @@ and validates/tests on ten disjoint held-out genera.
 - `scripts/build_paper_tables.py`: strict reconstruction of the 94-row paper
   tables from registered aggregate outputs.
 - `docs`: the benchmark card, complete data protocol, environment notes,
-  third-party provenance, paper-table schema, anonymous-repository handoff,
-  and WACV compliance audit.
+  third-party provenance, paper-table schema, and archived review documentation.
 
 ## Quick start without external data
 
@@ -261,10 +260,12 @@ canopy-fuel metrics restore metres with each tree's saved centre and scale.
 [`docs/DATA_PROTOCOL.md`](docs/DATA_PROTOCOL.md) gives every formula,
 parameter, unit, and direction.
 
-## Rebuild the paper tables
+## Rebuild the baseline tables
 
-The release includes the 94 frozen overall test means reported in the paper.
-Rebuild their numerical CSV and LaTeX tables without checkpoints or source data:
+The release includes 94 frozen overall baseline results. The commands below
+rebuild their numerical CSV and LaTeX tables without checkpoints or source
+data. This does not reproduce the camera-ready paper's additional unchanged-input
+controls, validation-based model-selection analysis, or sensitivity analyses:
 
 ```bash
 python scripts/build_paper_tables.py \
@@ -304,44 +305,14 @@ Each run manifest should record:
 - input/output cardinality and unique completion `(tree, mode, view)` keys;
 - aggregate and per-sample output hashes.
 
-Pretrained checkpoints are not stored in ordinary Git because individual files
-can exceed GitHub's 100 MB limit and the model set is several gigabytes. If
-weights are anonymously hosted for review, populate
-`manifests/checkpoints.json` with URLs, sizes, hashes, epochs, and source-config
-hashes before packaging.
-
-## Anonymous WACV delivery
-
-Run the release gate and create a deterministic supplementary archive:
-
-```bash
-python scripts/verify_release.py
-python scripts/package_review.py --output ../treebench_review.zip
-```
-
-The verifier rejects repository history, symlinks, binaries, checkpoints,
-notebooks, private paths, account markers, common token forms, malformed JSON,
-split drift, baseline-count drift, and any 16x training entrypoint. The packer
-excludes `.git`, fixes archive timestamps, and enforces the 200 MB WACV limit.
-
-For the double-blind submission, deliver the ZIP through OpenReview. Do not put
-a repository link in the manuscript, supplement, or rebuttal. An anonymous
-GitHub repository may be used as a staging copy only after its owner, commit
-identity, issues, actions, analytics, releases, and Git history pass the same
-audit. `scripts/initialize_anonymous_repo.sh` creates a clean local history with
-an anonymous commit identity after verification.
-[`docs/ANONYMOUS_GITHUB.md`](docs/ANONYMOUS_GITHUB.md) gives the remote-side
-inspection checklist and optional read-only mirror procedure.
+Pretrained checkpoints are not stored in this repository. For external
+checkpoints, use `manifests/checkpoints.json` to record URLs, sizes, hashes,
+epochs, and source-config hashes.
 
 ## Licensing and third-party attribution
 
-Upstream model and dataset citations identify third-party work and remain in an
-anonymous submission. Their licenses do not identify the submitting authors.
-The baseline registry records where an upstream license was found and blocks
-vendoring when it was not found.
-
-No license is assigned here to FOR-species20K or its derived point clouds. A
-license for the newly written TreeBench code must be selected before public
-distribution; that legal choice remains outside the technical review artifact.
-See `docs/THIRD_PARTY_DATA.md` and the baseline overlay manifest before posting
-the repository publicly.
+Upstream models and datasets remain subject to their respective terms. The
+baseline registry records where an upstream license was found; see
+`docs/THIRD_PARTY_DATA.md` and the baseline overlay manifest for details.
+This repository does not grant rights to FOR-species20K or its derived point
+clouds. No project-wide license is specified for the TreeBench code.
